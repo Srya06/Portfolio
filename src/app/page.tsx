@@ -1,35 +1,171 @@
+import Link from "next/link";
+import { ArrowRight, Code2, Sparkles } from "lucide-react";
 import { site } from "@/content/site";
 import { doors } from "@/content/doors";
 import { projects } from "@/content/projects";
+import { skillGroups } from "@/content/skills";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 md:p-24 text-center">
-      <div className="max-w-3xl space-y-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-bg-elev text-xs font-mono text-accent">
-          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          Chunk 0 Initialized · {site.role}
-        </div>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-fg">
-          {site.name}
-        </h1>
-        <p className="text-lg md:text-xl text-fg-muted">
-          {site.tagline}
-        </p>
-        <div className="flex flex-wrap justify-center gap-2 pt-4">
-          {doors.map((door) => (
-            <span
-              key={door.slug}
-              className="px-3 py-1.5 rounded-md border border-line bg-bg-elev text-xs text-fg-muted font-medium"
+    <div className="pt-24 space-y-32">
+      {/* Hero Section Shell (Chunk 2 Target) */}
+      <section id="hero" className="min-h-[80vh] flex flex-col justify-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="space-y-6 max-w-4xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-line bg-bg-elev/90 text-xs font-mono text-accent">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Applied AI Product Engineer · {site.location}</span>
+          </div>
+
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-fg leading-none">
+            Building useful AI products from models, data, and software.
+          </h1>
+
+          <p className="text-lg sm:text-xl text-fg-muted max-w-2xl font-normal leading-relaxed">
+            AI/ML-focused engineer working across Python, agent-based systems, and modern full-stack web applications. Grounded in code, architecture, and verifiable project evidence.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4 pt-4">
+            <Link
+              href="#work"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-fg font-medium text-sm transition-transform hover:scale-105"
             >
-              {door.title}
-            </span>
+              <span>Explore Selected Work</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <a
+              href={site.resumePath}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-line bg-bg-elev text-fg hover:border-accent hover:text-accent font-medium text-sm transition-colors"
+            >
+              <span>View Resume (PDF)</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Selected Work & Disciplines (Chunk 3 & 4 Target) */}
+      <section id="work" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
+        <div className="space-y-2 border-b border-line pb-6">
+          <p className="font-mono text-xs text-accent uppercase tracking-wider">01 / Curated Disciplines</p>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg">
+            Engineering Doors
+          </h2>
+          <p className="text-sm text-fg-muted max-w-xl">
+            Horizontal interactive portal section spanning 5 distinct domains of machine learning and software engineering.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {doors.map((door) => (
+            <div
+              key={door.slug}
+              className="p-5 rounded-xl border border-line bg-bg-elev/60 hover:border-accent/60 transition-all space-y-3 flex flex-col justify-between"
+            >
+              <div className="space-y-2">
+                <span className="text-[10px] font-mono text-accent uppercase px-2 py-0.5 rounded border border-line">
+                  {door.accent}
+                </span>
+                <h3 className="font-semibold text-base text-fg">{door.title}</h3>
+                <p className="text-xs text-fg-muted leading-relaxed">{door.blurb}</p>
+              </div>
+              <div className="pt-2 text-xs font-mono text-accent inline-flex items-center gap-1">
+                <span>Inspect category</span>
+                <ArrowRight className="w-3 h-3" />
+              </div>
+            </div>
           ))}
         </div>
-        <p className="text-xs text-fg-muted font-mono pt-8">
-          {projects.length} curated projects loaded · Asia/Kolkata timezone
-        </p>
-      </div>
-    </main>
+
+        {/* Featured Projects Summary */}
+        <div className="pt-6">
+          <div className="p-6 rounded-2xl border border-line bg-bg-elev/30 space-y-4">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono text-fg-muted">Featured Portfolio Repositories</span>
+              <span className="text-xs font-mono text-accent">{projects.length} verified projects</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {projects.map((proj) => (
+                <div key={proj.slug} className="p-4 rounded-lg border border-line/60 bg-bg space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-fg">{proj.title}</span>
+                    <span className="text-[10px] font-mono text-fg-muted px-1.5 py-0.5 rounded border border-line">
+                      {proj.status}
+                    </span>
+                  </div>
+                  <p className="text-xs text-fg-muted line-clamp-2">{proj.summary}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Capabilities Section Shell */}
+      <section id="capabilities" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
+        <div className="space-y-2 border-b border-line pb-6">
+          <p className="font-mono text-xs text-accent uppercase tracking-wider">02 / Technical Skills</p>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg">
+            Demonstrated Capabilities
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skillGroups.map((group) => (
+            <div key={group.name} className="p-6 rounded-xl border border-line bg-bg-elev/40 space-y-4">
+              <h3 className="font-mono text-xs text-accent uppercase tracking-wider flex items-center gap-2">
+                <Code2 className="w-3.5 h-3.5" />
+                <span>{group.name}</span>
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-2.5 py-1 rounded-md border border-line bg-bg text-xs font-mono text-fg-muted hover:text-fg hover:border-line/80 transition-colors"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Story Timeline Placeholder (Chunk 5 Target) */}
+      <section id="story" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+        <div className="space-y-2 border-b border-line pb-6">
+          <p className="font-mono text-xs text-accent uppercase tracking-wider">03 / Trajectory</p>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg">
+            Background & Education
+          </h2>
+          <p className="text-sm text-fg-muted max-w-xl">
+            Pinned scroll timeline detailing computer science engineering degree at MIT Mysore and applied AI initiatives.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact Section Placeholder (Chunk 6 Target) */}
+      <section id="contact" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-16">
+        <div className="p-8 md:p-12 rounded-3xl border border-line bg-bg-elev/50 text-center space-y-6">
+          <span className="text-xs font-mono text-accent uppercase tracking-wider">04 / Collaboration</span>
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-fg">
+            Interested in applied AI or full-stack collaboration?
+          </h2>
+          <p className="text-sm text-fg-muted max-w-lg mx-auto">
+            Available for internships, developer roles, and technical project partnerships.
+          </p>
+          <div className="pt-2">
+            <a
+              href={`mailto:${site.email}`}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-accent-fg font-semibold text-sm transition-transform hover:scale-105"
+            >
+              <span>Initiate Contact ({site.email})</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
