@@ -7,10 +7,18 @@ export type PortfolioProject = {
   summary: string;
   repo: string;
   stack: string[];
+  tags: string[];
   status: ProjectStatus;
   role: string;
   year: number;
   cover: string;
+  problem: string;
+  context: string;
+  architecture: string[];
+  implementedFeatures: string[];
+  plannedRoadmap: string[];
+  evaluation: string;
+  limitations: string;
   evidenceNeeded: string[];
   disclaimer?: string;
 };
@@ -21,6 +29,9 @@ export type DoorCategory = {
   blurb: string;
   image: string;
   accent: string;
+  accentColor: string;
+  projectCount: number;
+  disciplines: readonly string[];
 };
 
 export type StoryEntry = {

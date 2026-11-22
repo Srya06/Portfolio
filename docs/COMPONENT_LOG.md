@@ -19,3 +19,5 @@
 | Hero | Custom | Built-in | Page Top | 2-column layout pairing high-impact narrative with interactive 3D Ability Card and CTAs |
 | DoorCard | Custom (CSS 3D + Motion) | Built-in | Doors Wall | 3:5 aspect ratio, hover 3D swing (-28° rotateY) revealing inner chamber, router prefetch |
 | DoorsWall | Custom (Motion + Web API) | Built-in | Work Showcase | Horizontal swipe/drag carousel, trackpad/wheel support, progress bar, arrow key listener |
+| CategoryFilterGrid | Custom | Built-in | Category Page | Real-time tag filtering without page reload, project status tags, repository links |
+| CaseStudyTemplate | Custom | Built-in | Project Pages | Architectural breakdown, implemented vs. roadmap separation, disclaimer, next-project flow |

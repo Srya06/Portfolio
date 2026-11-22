@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="dmBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E0E10"/>
+      <stop offset="100%" stop-color="#220F16"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#dmBg)"/>
+  <!-- Computer Vision Diagnostic Window -->
+  <g transform="translate(100, 80)">
+    <rect width="600" height="320" rx="14" fill="#1E1217" stroke="rgba(244, 63, 94, 0.3)" stroke-width="1.5"/>
+    <!-- Image Viewport -->
+    <rect x="30" y="30" width="260" height="260" rx="10" fill="#29161E"/>
+    <circle cx="160" cy="160" r="70" fill="#3D1A25" stroke="#F43F5E" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <rect x="80" y="80" width="160" height="160" fill="none" stroke="#F43F5E" stroke-width="2"/>
+    <!-- Diagnostic Analysis Output -->
+    <g transform="translate(320, 40)">
+      <text y="20" font-family="monospace" font-size="13" fill="#F43F5E" font-weight="bold">DermaAI // Vision Diagnostics</text>
+      <text y="45" font-family="monospace" font-size="9" fill="#A09C94">RESEARCH ONLY · NON-CLINICAL</text>
+      <!-- Classification classes -->
+      <g transform="translate(0, 80)">
+        <text y="0" font-family="monospace" font-size="10" fill="#FFFFFF">Melanocytic Nevi</text>
+        <rect y="10" width="220" height="8" rx="4" fill="#351C26"/>
+        <rect y="10" width="180" height="8" rx="4" fill="#F43F5E"/>
+        <text y="40" font-family="monospace" font-size="10" fill="#FFFFFF">Benign Keratosis</text>
+        <rect y="50" width="220" height="8" rx="4" fill="#351C26"/>
+        <rect y="50" width="40" height="8" rx="4" fill="#A09C94"/>
+      </g>
+    </g>
+  </g>
+</svg>
