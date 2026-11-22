@@ -23,3 +23,5 @@
 | CaseStudyTemplate | Custom | Built-in | Project Pages | Architectural breakdown, implemented vs. roadmap separation, disclaimer, next-project flow |
 | RollingCounter | Custom (Motion) | Built-in | Story Timeline | Monospace animated rolling number counter (01/05), PopLayout exit transitions |
 | StoryTimeline | Custom (GSAP ScrollTrigger) | Built-in | Story Timeline | 100vh pinned scroll section on desktop, progress rail, manual stepper, mobile stacked fallback |
+| ContactSection | Custom | Built-in | Homepage | Ambient glow CTA card, category trigger chips, direct mailto fallback, responsive layout |
+| ContactFlow | Custom (RHF + Zod + Motion) | Built-in | Modal Dialog | 3-step inquiry modal (category pick -> form validation -> confirmed state), honeypot, a11y focus trap |

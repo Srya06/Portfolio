@@ -1,10 +1,10 @@
-import { ArrowRight, Code2 } from "lucide-react";
-import { site } from "@/content/site";
+import { Code2 } from "lucide-react";
 import { skillGroups } from "@/content/skills";
 import { Preloader } from "@/components/motion/Preloader";
 import { Hero } from "@/components/sections/Hero";
 import { DoorsWall } from "@/components/sections/DoorsWall";
 import { StoryTimeline } from "@/components/sections/StoryTimeline";
+import { ContactSection } from "@/components/sections/ContactSection";
 
 export default function HomePage() {
   return (
@@ -53,27 +53,8 @@ export default function HomePage() {
         {/* Story Timeline (Chunk 5 - Pinned Desktop & Stacked Mobile) */}
         <StoryTimeline />
 
-        {/* Contact Section Placeholder (Chunk 6 Target) */}
-        <section id="contact" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-16">
-          <div className="p-8 md:p-12 rounded-3xl border border-line bg-bg-elev/50 text-center space-y-6">
-            <span className="text-xs font-mono text-accent uppercase tracking-wider">04 / Collaboration</span>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-fg">
-              Interested in applied AI or full-stack collaboration?
-            </h2>
-            <p className="text-sm text-fg-muted max-w-lg mx-auto">
-              Available for internships, developer roles, and technical project partnerships.
-            </p>
-            <div className="pt-2">
-              <a
-                href={`mailto:${site.email}`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-accent-fg font-semibold text-sm transition-transform hover:scale-105"
-              >
-                <span>Initiate Contact ({site.email})</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </section>
+        {/* Interactive Contact Flow (Chunk 6) */}
+        <ContactSection />
       </div>
     </>
   );
