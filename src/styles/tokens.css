@@ -1,19 +1,23 @@
 :root {
-  /* Dark default */
-  --bg: #0E0E10;
-  --bg-elev: #17171A;
-  --fg: #F4F2EE;
-  --fg-muted: #A09C94;
-  --line: rgba(255, 255, 255, 0.08);
-  --accent: #00F0FF; /* Electric cyan accent */
-  --accent-fg: #0E0E10;
-  --success: #3DDC97;
-  --danger: #FF5A5F;
+  /* Warm Charcoal Editorial (Dark default) inspired by therishithakor.com */
+  --bg: #1A1818;
+  --bg-elev: #242020;
+  --bg-card: #2B2525;
+  --fg: #E8E4E0;
+  --fg-muted: #9E918E;
+  --line: rgba(196, 176, 176, 0.16);
+  --accent: #D6B26E; /* Warm artisan gold */
+  --accent-fg: #1A1818;
+  --accent-cyan: #00F0FF;
+  --accent-gold: #D6B26E;
+  --success: #7FB069;
+  --danger: #E05D5D;
 
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 28px;
-  --radius-pill: 999px;
+  --radius-card: 2rem;
+  --radius-pill: 9999px;
   --space: 4px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
@@ -23,11 +27,14 @@
 }
 
 [data-theme="light"] {
-  --bg: #F6F4F0;
-  --bg-elev: #FFFFFF;
-  --fg: #121212;
-  --fg-muted: #6B675F;
-  --line: rgba(0, 0, 0, 0.08);
-  --accent: #0099B8;
-  --accent-fg: #FFFFFF;
+  --bg: #E8E4E0; /* Warm stone paper */
+  --bg-elev: #F2EEEC;
+  --bg-card: #FAF8F5;
+  --fg: #1A1818;
+  --fg-muted: #7A6F6D;
+  --line: rgba(26, 24, 24, 0.12);
+  --accent: #8A6D3B;
+  --accent-fg: #FAF8F5;
+  --accent-cyan: #0099B8;
+  --accent-gold: #8A6D3B;
 }

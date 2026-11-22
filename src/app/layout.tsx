@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { CustomCursor } from "@/components/motion/CustomCursor";
 import { BackgroundGrid } from "@/components/motion/BackgroundGrid";
-import { FloatingDock } from "@/components/motion/FloatingDock";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -113,7 +112,6 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
-            <FloatingDock />
           </SmoothScroll>
         </ThemeProvider>
       </body>

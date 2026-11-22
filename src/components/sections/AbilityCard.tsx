@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useSpring, useMotionValue } from "motion/react";
-import { Cpu, Sparkles, ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { site } from "@/content/site";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -13,11 +13,11 @@ export function AbilityCard() {
   const [specularPos, setSpecularPos] = useState({ x: 50, y: 50 });
   const prefersReducedMotion = useReducedMotion();
 
-  // Motion values for smooth 3D tilt
+  // Motion values for silky smooth 3D tilt
   const rawRotateX = useMotionValue(0);
   const rawRotateY = useMotionValue(0);
 
-  const springConfig = { damping: 20, stiffness: 200, mass: 0.2 };
+  const springConfig = { damping: 24, stiffness: 220, mass: 0.25 };
   const rotateX = useSpring(rawRotateX, springConfig);
   const rotateY = useSpring(rawRotateY, springConfig);
 
@@ -28,15 +28,13 @@ export function AbilityCard() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Normalize from -1 to 1
     const normalizedX = (x / rect.width) * 2 - 1;
     const normalizedY = (y / rect.height) * 2 - 1;
 
-    // ±12 degree tilt
-    rawRotateX.set(-normalizedY * 12);
-    rawRotateY.set(normalizedX * 12);
+    // ±14 degree tilt
+    rawRotateX.set(-normalizedY * 14);
+    rawRotateY.set(normalizedX * 14);
 
-    // Specular light position in percentage
     setSpecularPos({
       x: Math.round((x / rect.width) * 100),
       y: Math.round((y / rect.height) * 100),
@@ -77,6 +75,16 @@ export function AbilityCard() {
       style={{ perspective: 1200 }}
       className="relative flex items-center justify-center p-4 select-none"
     >
+      {/* Warm ambient aura halo inspired by therishithakor.com */}
+      <div
+        className="pointer-events-none absolute -inset-6 sm:-inset-10 rounded-full opacity-70 blur-3xl transition-opacity duration-700"
+        style={{
+          background:
+            "radial-gradient(54% 44% at 50% 46%, rgba(230, 176, 110, 0.42), rgba(154, 98, 74, 0.16) 45%, transparent 72%)",
+        }}
+        aria-hidden="true"
+      />
+
       <motion.div
         ref={cardRef}
         role="button"
@@ -91,63 +99,56 @@ export function AbilityCard() {
           prefersReducedMotion
             ? {}
             : isHovered
-            ? { y: -6 }
-            : { y: [-3, 3, -3] }
+            ? { y: -8, scale: 1.015 }
+            : { y: [-4, 4, -4] }
         }
         transition={
           prefersReducedMotion
             ? {}
             : isHovered
-            ? { duration: 0.2 }
-            : { repeat: Infinity, duration: 6, ease: "easeInOut" }
+            ? { duration: 0.25 }
+            : { repeat: Infinity, duration: 6.5, ease: "easeInOut" }
         }
         style={{
           rotateX,
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="group relative w-full max-w-[340px] sm:max-w-[370px] aspect-[5/7] rounded-3xl p-6 flex flex-col justify-between cursor-pointer border border-line bg-gradient-to-b from-bg-elev/90 via-bg-elev/60 to-bg/95 shadow-2xl backdrop-blur-xl transition-shadow hover:shadow-cyan-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent overflow-hidden"
+        className="group relative w-full max-w-[340px] sm:max-w-[375px] aspect-[1040/1452] rounded-[2rem] p-6 sm:p-7 flex flex-col justify-between cursor-pointer border border-[#D6B26E]/30 bg-gradient-to-b from-[#282221] via-[#1C1818] to-[#120F0F] shadow-[0_34px_70px_-26px_rgba(0,0,0,0.9),0_4px_14px_-6px_rgba(0,0,0,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6B26E] overflow-hidden"
       >
-        {/* Dynamic Holographic Specular Sheen */}
+        {/* Fine gold rim highlight */}
         <div
-          className="pointer-events-none absolute inset-0 rounded-3xl transition-opacity duration-300 opacity-60 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 rounded-[2rem] border border-[#D6B26E]/20 shadow-[inset_0_0_0_1px_rgba(255,226,170,0.2),inset_0_0_24px_-6px_rgba(0,0,0,0.6)]"
+          aria-hidden="true"
+        />
+
+        {/* Dynamic Holographic Specular Glint & Sheen */}
+        <div
+          className="pointer-events-none absolute inset-0 rounded-[2rem] transition-opacity duration-300 opacity-40 group-hover:opacity-85 mix-blend-screen"
           style={{
-            background: `radial-gradient(circle at ${specularPos.x}% ${specularPos.y}%, rgba(0, 240, 255, 0.18) 0%, rgba(168, 85, 247, 0.08) 40%, transparent 70%)`,
+            background: `radial-gradient(circle at ${specularPos.x}% ${specularPos.y}%, rgba(255, 243, 212, 0.45) 0%, rgba(214, 178, 110, 0.18) 35%, transparent 68%)`,
           }}
           aria-hidden="true"
         />
 
-        {/* Ambient Holographic Border Edge */}
-        <div
-          className="pointer-events-none absolute inset-0 rounded-3xl border border-accent/20 group-hover:border-accent/60 transition-colors"
-          aria-hidden="true"
-        />
-
-        {/* Card Header: Identifier & Chip */}
-        <div className="relative z-10 flex items-center justify-between border-b border-line/60 pb-3">
+        {/* Card Header: Gold Badge & Status */}
+        <div className="relative z-10 flex items-center justify-between border-b border-[#D6B26E]/15 pb-3">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-bg border border-line flex items-center justify-center text-accent">
-              <Cpu className="w-4 h-4" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] font-mono tracking-wider text-fg-muted uppercase">
-                ENGINEERING IDENTIFIER
-              </span>
-              <span className="text-[11px] font-mono font-bold text-accent">
-                SYA-2026 // APPLIED AI
-              </span>
-            </div>
+            <span className="w-2 h-2 rounded-full bg-[#D6B26E]" />
+            <span className="text-[11px] font-mono tracking-widest text-[#D6B26E] uppercase font-semibold">
+              SURYA D // COLLECTOR #01
+            </span>
           </div>
 
-          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-line bg-bg text-[10px] font-mono text-fg-muted">
-            <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
+          <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-line bg-black/40 text-[10px] font-mono text-[#E8E4E0]/80">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#7FB069] animate-pulse" />
             <span>ACTIVE</span>
           </div>
         </div>
 
         {/* Card Center: Portrait & Visual Scanline */}
         <div className="relative z-10 my-auto flex flex-col items-center py-2 space-y-4">
-          <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border border-line bg-bg shadow-inner">
+          <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border border-[#D6B26E]/25 bg-black/60 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]">
             <Image
               src="/images/hero.svg"
               alt="Surya D stylized AI engineering portrait"
@@ -155,34 +156,34 @@ export function AbilityCard() {
               priority
               className="object-cover"
             />
-            {/* Subtle holographic scanline overlay */}
+            {/* Subtle soft light wash */}
             <div
-              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-accent/10 to-transparent animate-pulse"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-[#D6B26E]/10"
               aria-hidden="true"
             />
           </div>
 
           <div className="text-center space-y-1">
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fg flex items-center justify-center gap-1.5">
+            <h2 className="text-2xl font-bold tracking-tight text-[#E8E4E0] flex items-center justify-center gap-1.5">
               <span>{site.name}</span>
-              <Sparkles className="w-4 h-4 text-accent" />
+              <Sparkles className="w-4 h-4 text-[#D6B26E]" />
             </h2>
-            <p className="text-xs font-mono text-accent">
+            <p className="text-xs font-mono text-[#D6B26E] tracking-wide">
               {site.role}
             </p>
-            <p className="text-[11px] text-fg-muted font-mono">
+            <p className="text-[11px] text-[#9E918E] font-mono">
               MIT Mysore (VTU) · Mysuru / Bengaluru
             </p>
           </div>
         </div>
 
         {/* Card Skills Chips */}
-        <div className="relative z-10 space-y-2 pt-2 border-t border-line/60">
+        <div className="relative z-10 space-y-2 pt-2 border-t border-[#D6B26E]/15">
           <div className="flex flex-wrap gap-1.5 justify-center">
             {skills.map((skill) => (
               <span
                 key={skill}
-                className="px-2 py-0.5 rounded-md border border-line/80 bg-bg/80 text-[10px] font-mono text-fg-muted"
+                className="px-2.5 py-0.5 rounded-full border border-line bg-black/30 text-[10px] font-mono text-[#E8E4E0]/80 hover:border-[#D6B26E]/40 transition-colors"
               >
                 {skill}
               </span>
@@ -191,25 +192,23 @@ export function AbilityCard() {
         </div>
 
         {/* Card Footer: Barcode & Prompt */}
-        <div className="relative z-10 pt-3 flex items-center justify-between text-[10px] font-mono text-fg-muted">
-          <div className="flex items-center gap-1">
-            {/* Minimalistic SVG barcode representation */}
-            <div className="flex items-center gap-[2px] h-3.5" aria-hidden="true">
-              <span className="w-[2px] h-full bg-fg-muted" />
-              <span className="w-[1px] h-full bg-fg-muted" />
-              <span className="w-[3px] h-full bg-fg-muted" />
-              <span className="w-[1px] h-full bg-fg-muted" />
-              <span className="w-[2px] h-full bg-fg-muted" />
-              <span className="w-[4px] h-full bg-fg-muted" />
-              <span className="w-[1px] h-full bg-fg-muted" />
-              <span className="w-[2px] h-full bg-fg-muted" />
+        <div className="relative z-10 pt-3 flex items-center justify-between text-[10px] font-mono text-[#9E918E]">
+          <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-[2px] h-3.5 opacity-60" aria-hidden="true">
+              <span className="w-[2px] h-full bg-[#E8E4E0]" />
+              <span className="w-[1px] h-full bg-[#E8E4E0]" />
+              <span className="w-[3px] h-full bg-[#E8E4E0]" />
+              <span className="w-[1px] h-full bg-[#E8E4E0]" />
+              <span className="w-[2px] h-full bg-[#E8E4E0]" />
+              <span className="w-[4px] h-full bg-[#E8E4E0]" />
+              <span className="w-[1px] h-full bg-[#E8E4E0]" />
             </div>
-            <span className="text-[9px] text-fg-muted/60">849204</span>
+            <span className="text-[9px] text-[#9E918E]/60 tracking-wider">SYA-2026</span>
           </div>
 
-          <div className="inline-flex items-center gap-1 text-accent font-semibold group-hover:translate-x-1 transition-transform">
+          <div className="inline-flex items-center gap-1.5 text-[#D6B26E] font-semibold group-hover:translate-x-1 transition-transform">
             <span>ENTER WORKBENCH</span>
-            <ArrowRight className="w-3 h-3" />
+            <ArrowRight className="w-3.5 h-3.5" />
           </div>
         </div>
       </motion.div>

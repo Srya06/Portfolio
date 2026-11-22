@@ -42,11 +42,12 @@ test.describe("Surya D Portfolio - Core User Flows", () => {
     await expect(page.getByText("Verified Implemented Capabilities")).toBeVisible();
   });
 
-  test("floating dock is visible and has accessible links", async ({ page }) => {
+  test("navigation bar renders with live clock and menu", async ({ page }) => {
     await page.goto("/");
 
-    const dock = page.getByRole("navigation", { name: /floating quick navigation dock/i });
-    await expect(dock).toBeVisible();
+    const nav = page.getByRole("navigation").first();
+    await expect(nav).toBeVisible();
+    await expect(page.getByText(/IST/i)).toBeVisible();
   });
 
   test("custom 404 page renders with home navigation", async ({ page }) => {

@@ -53,7 +53,7 @@ export function DoorCard({ door, index }: DoorCardProps) {
   return (
     <div
       style={{ perspective: 1200 }}
-      className="relative shrink-0 w-[290px] sm:w-[320px] aspect-[3/5] select-none py-2"
+      className="relative shrink-0 w-[290px] sm:w-[325px] aspect-[10/16] select-none py-2"
     >
       <div
         role="button"
@@ -65,23 +65,23 @@ export function DoorCard({ door, index }: DoorCardProps) {
         onFocus={handleMouseEnter}
         onBlur={handleMouseLeave}
         aria-label={`Open ${door.title} category door. Contains ${door.projectCount} verified projects.`}
-        className="group relative w-full h-full rounded-2xl border border-line bg-bg-elev/80 p-5 flex flex-col justify-between cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent overflow-hidden transition-all duration-300 hover:border-line/90 shadow-xl"
+        className="group relative w-full h-full rounded-2xl border border-line bg-[#1E1B1B] p-5 flex flex-col justify-between cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent overflow-hidden transition-all duration-300 hover:border-line/90 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]"
       >
         {/* Interior Chamber (Revealed when door swings open) */}
         <div
-          className="absolute inset-0 p-5 flex flex-col justify-between bg-bg/95 z-0"
+          className="absolute inset-0 p-5 flex flex-col justify-between bg-[#151313] z-0"
           aria-hidden={!isOpen}
         >
           {/* Chamber Artwork */}
-          <div className="relative w-full h-44 rounded-xl overflow-hidden border border-line/60 bg-bg">
+          <div className="relative w-full h-44 rounded-xl overflow-hidden border border-line/60 bg-[#1A1818]">
             <Image
               src={door.image}
               alt={door.title}
               fill
-              className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+              className="object-cover opacity-85 group-hover:opacity-100 transition-opacity"
             />
             <div
-              className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-[#151313] via-transparent to-transparent"
               aria-hidden="true"
             />
           </div>
@@ -89,10 +89,10 @@ export function DoorCard({ door, index }: DoorCardProps) {
           {/* Chamber Content Details */}
           <div className="space-y-3 z-10">
             <div className="flex items-center justify-between text-[11px] font-mono">
-              <span className="text-fg-muted">PROJECTS READY</span>
+              <span className="text-fg-muted uppercase tracking-wider">PROJECTS READY</span>
               <span
-                className="px-2 py-0.5 rounded font-bold"
-                style={{ color: door.accentColor, backgroundColor: `${door.accentColor}15` }}
+                className="px-2.5 py-0.5 rounded-full font-bold"
+                style={{ color: door.accentColor, backgroundColor: `${door.accentColor}18` }}
               >
                 {door.projectCount} Verified
               </span>
@@ -106,7 +106,7 @@ export function DoorCard({ door, index }: DoorCardProps) {
               {door.disciplines.map((item) => (
                 <span
                   key={item}
-                  className="px-1.5 py-0.5 rounded border border-line bg-bg text-[10px] font-mono text-fg-muted"
+                  className="px-2 py-0.5 rounded-full border border-line bg-black/40 text-[10px] font-mono text-fg-muted"
                 >
                   {item}
                 </span>
@@ -134,15 +134,15 @@ export function DoorCard({ door, index }: DoorCardProps) {
             prefersReducedMotion
               ? {}
               : isOpen
-              ? { rotateY: -28, x: -8 }
+              ? { rotateY: -30, x: -10 }
               : { rotateY: 0, x: 0 }
           }
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 w-full h-full rounded-xl border border-line/90 bg-gradient-to-br from-bg-elev via-bg to-bg-elev/90 p-5 flex flex-col justify-between shadow-2xl backdrop-blur-md"
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 w-full h-full rounded-xl border border-line/80 bg-gradient-to-br from-[#282323] via-[#211D1D] to-[#1A1818] p-5 flex flex-col justify-between shadow-2xl backdrop-blur-md"
         >
-          {/* Subtle metallic texture sheen */}
+          {/* Subtle warm stone texture sheen */}
           <div
-            className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent opacity-80"
+            className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-tr from-transparent via-white/[0.02] to-transparent opacity-80"
             aria-hidden="true"
           />
 
@@ -157,9 +157,9 @@ export function DoorCard({ door, index }: DoorCardProps) {
               </span>
             </div>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-line bg-black/30">
               <span
-                className="w-2 h-2 rounded-full animate-pulse"
+                className="w-1.5 h-1.5 rounded-full animate-pulse"
                 style={{ backgroundColor: door.accentColor }}
               />
               <span className="text-[10px] font-mono text-fg-muted uppercase">
@@ -170,7 +170,7 @@ export function DoorCard({ door, index }: DoorCardProps) {
 
           {/* Door Center Plaque & Title */}
           <div className="relative z-10 space-y-3 my-auto py-4">
-            <div className="w-10 h-10 rounded-xl bg-bg border border-line flex items-center justify-center text-accent shadow-sm">
+            <div className="w-10 h-10 rounded-xl bg-black/40 border border-line flex items-center justify-center text-accent shadow-sm">
               <Layers className="w-5 h-5" style={{ color: door.accentColor }} />
             </div>
 

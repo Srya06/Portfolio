@@ -10,51 +10,37 @@ export function BackgroundGrid() {
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
     >
-      {/* Ambient gradient aura spotlights */}
+      {/* Warm ambient atmosphere pools inspired by therishithakor.com */}
       <div
-        className={`absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-accent/[0.04] rounded-full blur-[140px] ${
+        className={`absolute -top-32 left-1/4 w-[700px] h-[450px] rounded-full blur-[160px] opacity-25 ${
           prefersReduced ? "" : "animate-pulse"
         }`}
-        style={{ animationDuration: "8s" }}
+        style={{
+          background: "radial-gradient(circle, rgba(214, 178, 110, 0.35) 0%, rgba(164, 85, 44, 0.15) 50%, transparent 70%)",
+          animationDuration: "12s",
+        }}
       />
       <div
-        className={`absolute top-1/2 -right-40 w-[600px] h-[500px] bg-accent/[0.025] rounded-full blur-[160px] ${
+        className={`absolute top-1/3 -right-32 w-[600px] h-[550px] rounded-full blur-[180px] opacity-20 ${
           prefersReduced ? "" : "animate-pulse"
         }`}
-        style={{ animationDuration: "12s" }}
+        style={{
+          background: "radial-gradient(circle, rgba(196, 176, 176, 0.25) 0%, rgba(107, 92, 92, 0.15) 50%, transparent 70%)",
+          animationDuration: "15s",
+        }}
       />
       <div
-        className={`absolute -bottom-40 -left-40 w-[600px] h-[500px] bg-accent/[0.03] rounded-full blur-[160px] ${
+        className={`absolute -bottom-40 left-1/3 w-[650px] h-[500px] rounded-full blur-[180px] opacity-15 ${
           prefersReduced ? "" : "animate-pulse"
         }`}
-        style={{ animationDuration: "10s" }}
+        style={{
+          background: "radial-gradient(circle, rgba(214, 178, 110, 0.2) 0%, transparent 70%)",
+          animationDuration: "10s",
+        }}
       />
 
-      {/* Retro-grid SVG pattern */}
-      <svg
-        className="absolute inset-0 w-full h-full stroke-fg/[0.035] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_80%)] opacity-70"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <pattern
-            id="portfolio-grid-pattern"
-            width="48"
-            height="48"
-            patternUnits="userSpaceOnUse"
-          >
-            <path
-              d="M 48 0 L 0 0 0 48"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-            />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#portfolio-grid-pattern)" />
-      </svg>
-
-      {/* Subtle top horizontal beam line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
+      {/* Subtle top hairline */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-line to-transparent opacity-60" />
     </div>
   );
 }
