@@ -17,3 +17,5 @@
 | TextReveal | Custom (Motion) | Built-in | Hero Headline | Word-split staggered entrance, translateY and opacity easing, reduced-motion fallback |
 | RoleMarquee | Custom (Motion) | Built-in | Hero Ribbon | Infinite horizontal marquee of technical pillars, pause-on-hover, accessible layout |
 | Hero | Custom | Built-in | Page Top | 2-column layout pairing high-impact narrative with interactive 3D Ability Card and CTAs |
+| DoorCard | Custom (CSS 3D + Motion) | Built-in | Doors Wall | 3:5 aspect ratio, hover 3D swing (-28° rotateY) revealing inner chamber, router prefetch |
+| DoorsWall | Custom (Motion + Web API) | Built-in | Work Showcase | Horizontal swipe/drag carousel, trackpad/wheel support, progress bar, arrow key listener |

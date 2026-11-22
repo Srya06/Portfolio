@@ -1,10 +1,9 @@
 import { ArrowRight, Code2 } from "lucide-react";
 import { site } from "@/content/site";
-import { doors } from "@/content/doors";
-import { projects } from "@/content/projects";
 import { skillGroups } from "@/content/skills";
 import { Preloader } from "@/components/motion/Preloader";
 import { Hero } from "@/components/sections/Hero";
+import { DoorsWall } from "@/components/sections/DoorsWall";
 
 export default function HomePage() {
   return (
@@ -15,64 +14,10 @@ export default function HomePage() {
       {/* Hero Section with 3D Ability Card & Role Marquee */}
       <Hero />
 
-      <div className="pt-24 space-y-32">
-        {/* Selected Work & Disciplines (Chunk 3 & 4 Target) */}
-        <section id="work" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
-          <div className="space-y-2 border-b border-line pb-6">
-            <p className="font-mono text-xs text-accent uppercase tracking-wider">01 / Curated Disciplines</p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg">
-              Engineering Doors
-            </h2>
-            <p className="text-sm text-fg-muted max-w-xl">
-              Horizontal interactive portal section spanning 5 distinct domains of machine learning and software engineering.
-            </p>
-          </div>
+      {/* Interactive Horizontal Doors Wall (Chunk 3) */}
+      <DoorsWall />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {doors.map((door) => (
-              <div
-                key={door.slug}
-                className="p-5 rounded-xl border border-line bg-bg-elev/60 hover:border-accent/60 transition-all space-y-3 flex flex-col justify-between"
-              >
-                <div className="space-y-2">
-                  <span className="text-[10px] font-mono text-accent uppercase px-2 py-0.5 rounded border border-line">
-                    {door.accent}
-                  </span>
-                  <h3 className="font-semibold text-base text-fg">{door.title}</h3>
-                  <p className="text-xs text-fg-muted leading-relaxed">{door.blurb}</p>
-                </div>
-                <div className="pt-2 text-xs font-mono text-accent inline-flex items-center gap-1">
-                  <span>Inspect category</span>
-                  <ArrowRight className="w-3 h-3" />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Featured Projects Summary */}
-          <div className="pt-6">
-            <div className="p-6 rounded-2xl border border-line bg-bg-elev/30 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-fg-muted">Featured Portfolio Repositories</span>
-                <span className="text-xs font-mono text-accent">{projects.length} verified projects</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {projects.map((proj) => (
-                  <div key={proj.slug} className="p-4 rounded-lg border border-line/60 bg-bg space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold text-fg">{proj.title}</span>
-                      <span className="text-[10px] font-mono text-fg-muted px-1.5 py-0.5 rounded border border-line">
-                        {proj.status}
-                      </span>
-                    </div>
-                    <p className="text-xs text-fg-muted line-clamp-2">{proj.summary}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
+      <div className="pt-16 space-y-32">
         {/* Capabilities Section Shell */}
         <section id="capabilities" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
           <div className="space-y-2 border-b border-line pb-6">

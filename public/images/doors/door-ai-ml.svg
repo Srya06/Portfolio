@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="aimlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E0E10"/>
+      <stop offset="50%" stop-color="#141920"/>
+      <stop offset="100%" stop-color="#0B1318"/>
+    </linearGradient>
+    <linearGradient id="cyanLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#0088FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="520" fill="url(#aimlGrad)"/>
+  <!-- Grid -->
+  <g stroke="rgba(0, 240, 255, 0.08)" stroke-width="1">
+    <line x1="40" y1="0" x2="40" y2="520"/>
+    <line x1="100" y1="0" x2="100" y2="520"/>
+    <line x1="160" y1="0" x2="160" y2="520"/>
+    <line x1="220" y1="0" x2="220" y2="520"/>
+    <line x1="280" y1="0" x2="280" y2="520"/>
+    <line x1="0" y1="100" x2="320" y2="100"/>
+    <line x1="0" y1="200" x2="320" y2="200"/>
+    <line x1="0" y1="300" x2="320" y2="300"/>
+    <line x1="0" y1="400" x2="320" y2="400"/>
+  </g>
+  <!-- Neural graph visualization -->
+  <circle cx="160" cy="220" r="70" fill="none" stroke="rgba(0, 240, 255, 0.2)" stroke-dasharray="4 4"/>
+  <circle cx="160" cy="220" r="100" fill="none" stroke="rgba(0, 240, 255, 0.1)"/>
+  <path d="M 60 280 Q 110 140 160 210 T 260 160" fill="none" stroke="url(#cyanLine)" stroke-width="2"/>
+  <circle cx="60" cy="280" r="5" fill="#00F0FF"/>
+  <circle cx="110" cy="180" r="4" fill="#00F0FF"/>
+  <circle cx="160" cy="210" r="6" fill="#00F0FF"/>
+  <circle cx="210" cy="240" r="4" fill="#00F0FF"/>
+  <circle cx="260" cy="160" r="5" fill="#00F0FF"/>
+  <!-- Nodes & connections -->
+  <line x1="160" y1="210" x2="160" y2="120" stroke="rgba(0, 240, 255, 0.3)" stroke-width="1.5"/>
+  <circle cx="160" cy="120" r="4" fill="#00F0FF"/>
+  <!-- Status labels -->
+  <text x="160" y="380" text-anchor="middle" font-family="monospace" font-size="12" fill="#00F0FF" font-weight="bold">AI &amp; MACHINE LEARNING</text>
+  <text x="160" y="405" text-anchor="middle" font-family="monospace" font-size="9" fill="#A09C94">DEMAND FORECASTING &amp; PREDICTION</text>
+</svg>
