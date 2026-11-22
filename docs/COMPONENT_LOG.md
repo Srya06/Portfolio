@@ -21,3 +21,5 @@
 | DoorsWall | Custom (Motion + Web API) | Built-in | Work Showcase | Horizontal swipe/drag carousel, trackpad/wheel support, progress bar, arrow key listener |
 | CategoryFilterGrid | Custom | Built-in | Category Page | Real-time tag filtering without page reload, project status tags, repository links |
 | CaseStudyTemplate | Custom | Built-in | Project Pages | Architectural breakdown, implemented vs. roadmap separation, disclaimer, next-project flow |
+| RollingCounter | Custom (Motion) | Built-in | Story Timeline | Monospace animated rolling number counter (01/05), PopLayout exit transitions |
+| StoryTimeline | Custom (GSAP ScrollTrigger) | Built-in | Story Timeline | 100vh pinned scroll section on desktop, progress rail, manual stepper, mobile stacked fallback |

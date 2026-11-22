@@ -4,6 +4,7 @@ import { skillGroups } from "@/content/skills";
 import { Preloader } from "@/components/motion/Preloader";
 import { Hero } from "@/components/sections/Hero";
 import { DoorsWall } from "@/components/sections/DoorsWall";
+import { StoryTimeline } from "@/components/sections/StoryTimeline";
 
 export default function HomePage() {
   return (
@@ -18,7 +19,7 @@ export default function HomePage() {
       <DoorsWall />
 
       <div className="pt-16 space-y-32">
-        {/* Capabilities Section Shell */}
+        {/* Capabilities Section */}
         <section id="capabilities" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
           <div className="space-y-2 border-b border-line pb-6">
             <p className="font-mono text-xs text-accent uppercase tracking-wider">02 / Technical Skills</p>
@@ -49,18 +50,8 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Story Timeline Placeholder (Chunk 5 Target) */}
-        <section id="story" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
-          <div className="space-y-2 border-b border-line pb-6">
-            <p className="font-mono text-xs text-accent uppercase tracking-wider">03 / Trajectory</p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg">
-              Background & Education
-            </h2>
-            <p className="text-sm text-fg-muted max-w-xl">
-              Pinned scroll timeline detailing computer science engineering degree at MIT Mysore and applied AI initiatives.
-            </p>
-          </div>
-        </section>
+        {/* Story Timeline (Chunk 5 - Pinned Desktop & Stacked Mobile) */}
+        <StoryTimeline />
 
         {/* Contact Section Placeholder (Chunk 6 Target) */}
         <section id="contact" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-16">

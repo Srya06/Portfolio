@@ -35,11 +35,13 @@ export type DoorCategory = {
 };
 
 export type StoryEntry = {
-  type: "education" | "work" | "community";
+  id: string;
+  type: "education" | "work" | "community" | "ai" | "product";
   period: string;
+  category: string;
   title: string;
   organisation: string;
-  location?: string;
+  location: string;
   bullets: string[];
   status: "confirmed" | "confirm";
 };
