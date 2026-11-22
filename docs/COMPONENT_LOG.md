@@ -11,3 +11,9 @@
 | Clock | Custom | Built-in | Nav & Footer | Asia/Kolkata live time formatter, accessible label, 30s auto-refresh |
 | AvailabilityPill | Custom | Built-in | Nav & Footer | Pulsing status indicator, aria-label, configurable status |
 | RoleRotator | Custom (Motion) | Built-in | Nav | Smooth vertical text rotation, reduced-motion fallback |
+| Preloader | Custom (Motion) | Built-in | Entry | Session-cached 0→100% asset tracker, clip-path exit reveal, reduced-motion bypass |
+| AbilityCard | Custom (CSS 3D + Motion) | Built-in | Hero | 5:7 aspect ratio, ±12° pointer 3D tilt, holographic sheen, idle sway, keyboard accessible |
+| MagneticButton | Custom (Motion) | Built-in | Hero CTAs | Fine pointer magnetic pull (≤ 12px), spring damping, mobile/reduced-motion bypass |
+| TextReveal | Custom (Motion) | Built-in | Hero Headline | Word-split staggered entrance, translateY and opacity easing, reduced-motion fallback |
+| RoleMarquee | Custom (Motion) | Built-in | Hero Ribbon | Infinite horizontal marquee of technical pillars, pause-on-hover, accessible layout |
+| Hero | Custom | Built-in | Page Top | 2-column layout pairing high-impact narrative with interactive 3D Ability Card and CTAs |
