@@ -25,3 +25,7 @@
 | StoryTimeline | Custom (GSAP ScrollTrigger) | Built-in | Story Timeline | 100vh pinned scroll section on desktop, progress rail, manual stepper, mobile stacked fallback |
 | ContactSection | Custom | Built-in | Homepage | Ambient glow CTA card, category trigger chips, direct mailto fallback, responsive layout |
 | ContactFlow | Custom (RHF + Zod + Motion) | Built-in | Modal Dialog | 3-step inquiry modal (category pick -> form validation -> confirmed state), honeypot, a11y focus trap |
+| BackgroundGrid | 21st.dev / Aceternity | Built-in | Global Layout | Ultrafine retro-grid SVG pattern with ambient animated aurora aura spotlights, zero performance cost |
+| CardSpotlight | 21st.dev / Magic UI | Built-in | Cards & Bento | Mouse-tracking radial gradient spotlight highlight on hover, reduced motion bypass |
+| FloatingDock | 21st.dev / macOS Dock | Built-in | Global Navigation | Bottom-center floating dock with spring magnification, micro-tooltips, accessible keyboard navigation |
+| ShimmerButton | 21st.dev / Magic UI | Built-in | Primary CTAs | Rotating conic-gradient border shimmer beam with token-styled interior surface |

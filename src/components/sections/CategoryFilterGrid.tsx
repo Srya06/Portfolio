@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Github, Sparkles } from "lucide-react";
 import { PortfolioProject } from "@/content/types";
+import { CardSpotlight } from "@/components/motion/CardSpotlight";
 
 interface CategoryFilterGridProps {
   projects: PortfolioProject[];
@@ -47,7 +48,7 @@ export function CategoryFilterGrid({ projects, categorySlug }: CategoryFilterGri
       {filteredProjects.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {filteredProjects.map((project) => (
-            <div
+            <CardSpotlight
               key={project.slug}
               className="group p-6 rounded-3xl border border-line bg-bg-elev/60 hover:border-accent/60 transition-all duration-300 space-y-5 flex flex-col justify-between shadow-lg backdrop-blur-sm"
             >
@@ -109,7 +110,7 @@ export function CategoryFilterGrid({ projects, categorySlug }: CategoryFilterGri
                   <ArrowUpRight className="w-3 h-3" />
                 </a>
               </div>
-            </div>
+            </CardSpotlight>
           ))}
         </div>
       ) : (

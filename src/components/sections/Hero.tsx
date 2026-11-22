@@ -4,6 +4,7 @@ import { ArrowDown, ArrowRight, FileText, Sparkles, Terminal } from "lucide-reac
 import { site } from "@/content/site";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { ShimmerButton } from "@/components/motion/ShimmerButton";
 import { AbilityCard } from "@/components/sections/AbilityCard";
 import { RoleMarquee } from "@/components/sections/RoleMarquee";
 
@@ -63,16 +64,13 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Magnetic Call to Actions */}
+            {/* Magnetic Call to Actions with 21st.dev Shimmer Button */}
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <MagneticButton strength={0.25}>
-                <button
-                  onClick={scrollToWork}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-accent-fg font-semibold text-sm transition-transform hover:opacity-95 shadow-lg shadow-cyan-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                >
+                <ShimmerButton onClick={scrollToWork}>
                   <span>See Selected Work</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </ShimmerButton>
               </MagneticButton>
 
               <MagneticButton strength={0.25}>

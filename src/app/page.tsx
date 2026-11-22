@@ -1,6 +1,7 @@
 import { Code2 } from "lucide-react";
 import { skillGroups } from "@/content/skills";
 import { Preloader } from "@/components/motion/Preloader";
+import { CardSpotlight } from "@/components/motion/CardSpotlight";
 import { Hero } from "@/components/sections/Hero";
 import { DoorsWall } from "@/components/sections/DoorsWall";
 import { StoryTimeline } from "@/components/sections/StoryTimeline";
@@ -30,7 +31,10 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skillGroups.map((group) => (
-              <div key={group.name} className="p-6 rounded-xl border border-line bg-bg-elev/40 space-y-4">
+              <CardSpotlight
+                key={group.name}
+                className="p-6 rounded-xl border border-line bg-bg-elev/40 space-y-4 hover:border-accent/40 transition-colors"
+              >
                 <h3 className="font-mono text-xs text-accent uppercase tracking-wider flex items-center gap-2">
                   <Code2 className="w-3.5 h-3.5" />
                   <span>{group.name}</span>
@@ -45,7 +49,7 @@ export default function HomePage() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </CardSpotlight>
             ))}
           </div>
         </section>

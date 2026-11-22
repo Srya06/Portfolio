@@ -5,6 +5,8 @@ import { site } from "@/content/site";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { CustomCursor } from "@/components/motion/CustomCursor";
+import { BackgroundGrid } from "@/components/motion/BackgroundGrid";
+import { FloatingDock } from "@/components/motion/FloatingDock";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 
@@ -47,15 +49,17 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased bg-bg text-fg min-h-screen selection:bg-accent selection:text-accent-fg flex flex-col">
+      <body className="font-sans antialiased bg-bg text-fg min-h-screen selection:bg-accent selection:text-accent-fg flex flex-col relative">
         <ThemeProvider>
           <SmoothScroll>
+            <BackgroundGrid />
             <CustomCursor />
             <Nav />
-            <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
+            <main id="main-content" className="flex-1 focus:outline-none relative z-10" tabIndex={-1}>
               {children}
             </main>
             <Footer />
+            <FloatingDock />
           </SmoothScroll>
         </ThemeProvider>
       </body>
