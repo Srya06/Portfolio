@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -13,6 +14,28 @@ export async function generateStaticParams() {
   return doors.map((d) => ({
     category: d.slug,
   }));
+}
+
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  const { category } = await params;
+  const door = doors.find((d) => d.slug === category);
+  if (!door) return {};
+
+  return {
+    title: `${door.title} — Surya D`,
+    description: door.blurb,
+    openGraph: {
+      title: `${door.title} | Surya D Portfolio`,
+      description: door.blurb,
+      images: [
+        {
+          url: `/api/og?title=${encodeURIComponent(door.title)}&category=${encodeURIComponent(door.slug)}&description=${encodeURIComponent(door.blurb)}`,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {

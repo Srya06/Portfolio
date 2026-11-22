@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +15,28 @@ export async function generateStaticParams() {
     category: p.category,
     slug: p.slug,
   }));
+}
+
+export async function generateMetadata({ params }: CaseStudyPageProps): Promise<Metadata> {
+  const { category, slug } = await params;
+  const project = projects.find((p) => p.slug === slug && p.category === category);
+  if (!project) return {};
+
+  return {
+    title: `${project.title} — Case Study | Surya D`,
+    description: project.summary,
+    openGraph: {
+      title: `${project.title} — Case Study | Surya D`,
+      description: project.summary,
+      images: [
+        {
+          url: `/api/og?title=${encodeURIComponent(project.title)}&category=${encodeURIComponent(project.role)}&description=${encodeURIComponent(project.summary)}`,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {

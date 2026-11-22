@@ -3,6 +3,7 @@ export const site = {
   shortName: "Surya",
   role: "AI/ML Engineer & Full-Stack Developer",
   tagline: "Building useful AI products from models, data, and software.",
+  url: "https://suryad.dev",
   location: "Mysuru / Bengaluru, India", // CONFIRM public display preference
   timezone: "Asia/Kolkata",
   email: "sryaraj06@gmail.com",
