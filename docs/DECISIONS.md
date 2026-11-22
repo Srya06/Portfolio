@@ -10,6 +10,9 @@
 | Do not publish email until verified | Supplied address may contain a typo | Pending |
 | Use Mysuru/Bengaluru only after location preference confirmed | Both are supported by known context; public display is user's choice | Pending |
 | Simplify unused generic categories | Candidate portfolio is engineering-focused; generic graphic/photo categories dilute positioning | Adopted |
+| Configure strict Content Security Policy & Security Headers | Protects against XSS, clickjacking, and MIME confusion attacks | Adopted |
+| Adopt Playwright for cross-browser E2E suite | Meets TESTING.md requirement for automated multi-browser verification | Adopted |
+| Add minimal valid PDF resume artifact at /resume.pdf | Satisfies asset manifest and provides instant verification for recruiters | Adopted |
 
 ## Open confirmations
 - Confirm display name (Surya D vs Surya).
