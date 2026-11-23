@@ -4,10 +4,16 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu as MenuIcon } from "lucide-react";
 import { site } from "@/content/site";
-import { doors } from "@/content/doors";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { Clock } from "@/components/layout/Clock";
 import { Menu } from "@/components/layout/Menu";
+
+const navDisciplines = [
+  { href: "/work/full-stack-products", label: "Full-Stack" },
+  { href: "/work/agentic-systems", label: "Agentic Systems" },
+  { href: "/work/ai-ml", label: "AI / ML" },
+  { href: "/work/computer-vision", label: "Computer Vision" },
+];
 
 export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -46,18 +52,18 @@ export function Nav() {
             </span>
           </Link>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links matching therishithakor.com */}
           <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-6 text-xs font-medium text-fg-muted">
             <Link href="/" className="hover:text-fg transition-colors">
               Home
             </Link>
-            {doors.map((door) => (
+            {navDisciplines.map((item) => (
               <Link
-                key={door.slug}
-                href={`/work/${door.slug}`}
+                key={item.href}
+                href={item.href}
                 className="hover:text-fg transition-colors"
               >
-                {door.title}
+                {item.label}
               </Link>
             ))}
             <Link href="/#story" className="hover:text-fg transition-colors">

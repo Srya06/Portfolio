@@ -4,7 +4,6 @@ import "@/styles/globals.css";
 import { site } from "@/content/site";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
-import { CustomCursor } from "@/components/motion/CustomCursor";
 import { BackgroundGrid } from "@/components/motion/BackgroundGrid";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
@@ -115,7 +114,6 @@ export default function RootLayout({
         <ThemeProvider>
           <SmoothScroll>
             <BackgroundGrid />
-            <CustomCursor />
             <LampPullCord />
             <Nav />
             <main id="main-content" className="flex-1 focus:outline-none relative z-10" tabIndex={-1}>

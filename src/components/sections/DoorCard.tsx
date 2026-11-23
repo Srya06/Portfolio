@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowRight } from "lucide-react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import type { DoorItem } from "@/content/doors";
 
@@ -18,7 +17,7 @@ interface DoorCardProps {
 export function DoorCard({
   door,
   isActive = false,
-  onActivate = () => {},
+  onActivate = () => { },
   isAnyActive = false,
 }: DoorCardProps) {
   const router = useRouter();
@@ -46,11 +45,11 @@ export function DoorCard({
       aria-label={`${door.title} architectural door. Click to enter.`}
       aria-expanded={isActive}
       style={{ perspective: 1400, transformStyle: "preserve-3d" }}
-      className={`relative w-[210px] sm:w-[230px] md:w-[250px] aspect-[9/18] rounded-t-full bg-[#181616] p-2.5 sm:p-3 border-2 border-[#2C2727] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent shrink-0 select-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`relative w-[190px] sm:w-[210px] md:w-[225px] lg:w-[240px] aspect-[9/18] rounded-t-full bg-[#181616] p-2.5 sm:p-3 border-2 border-[#2C2727] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent shrink-0 select-none transition-opacity duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isActive
           ? "opacity-100 z-20"
           : isAnyActive
-          ? "opacity-[0.07] pointer-events-none z-10"
+          ? "opacity-[0.06] z-10 hover:opacity-100"
           : "opacity-100 z-10 hover:brightness-105"
       }`}
     >
@@ -70,14 +69,11 @@ export function DoorCard({
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.85 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                 className="z-20 -mt-10"
               >
-                <div
-                  className="px-4 py-2 rounded-full bg-[#FAF8F5] text-[#1A1818] font-bold text-xs shadow-lg hover:scale-105 active:scale-95 transition-transform flex items-center gap-1.5 pointer-events-auto"
-                >
+                <div className="px-3.5 py-1.5 rounded-full bg-[#FAF8F5] text-[#1A1818] font-bold text-xs shadow-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center pointer-events-auto">
                   <span>Click to enter</span>
-                  <ArrowRight className="w-3 h-3" />
                 </div>
               </motion.div>
             )}
@@ -89,10 +85,10 @@ export function DoorCard({
           initial={false}
           animate={
             isActive && !prefersReduced
-              ? { rotateY: -62, scaleX: 0.96 }
+              ? { rotateY: -58, scaleX: 0.96 }
               : { rotateY: 0, scaleX: 1 }
           }
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           style={{
             transformOrigin: "left center",
             transformStyle: "preserve-3d",
