@@ -177,17 +177,15 @@ export function ContactFlow({
                       key={opt.id}
                       type="button"
                       onClick={() => handleSelectNeed(opt.id)}
-                      className={`w-full p-3.5 rounded-xl border text-left transition-all flex items-center justify-between group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                        isSelected
-                          ? "border-white bg-white/10 text-white"
-                          : "border-white/10 bg-white/[0.03] text-[#C4BFB6] hover:border-white/30 hover:bg-white/[0.06]"
-                      }`}
+                      className={`w-full p-3.5 rounded-xl border text-left transition-all flex items-center justify-between group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${isSelected
+                        ? "border-white bg-white/10 text-white"
+                        : "border-white/10 bg-white/[0.03] text-[#C4BFB6] hover:border-white/30 hover:bg-white/[0.06]"
+                        }`}
                     >
                       <div className="flex items-center gap-3.5">
                         <div
-                          className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                            isSelected ? "border-white" : "border-white/30"
-                          }`}
+                          className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${isSelected ? "border-white" : "border-white/30"
+                            }`}
                         >
                           {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
                         </div>

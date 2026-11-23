@@ -124,6 +124,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           alt={`${project.title} architectural overview and interface diagram`}
           fill
           priority
+          unoptimized={project.cover.endsWith(".svg")}
           className="object-cover"
         />
       </div>

@@ -32,6 +32,7 @@ export function MonitorMockup({
                 src={image}
                 alt={`${title} interface preview`}
                 fill
+                unoptimized={image.endsWith(".svg")}
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 600px"
               />

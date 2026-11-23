@@ -29,3 +29,4 @@
 | CardSpotlight | 21st.dev / Magic UI | Built-in | Cards & Bento | Mouse-tracking radial gradient spotlight highlight on hover, reduced motion bypass |
 | FloatingDock | 21st.dev / macOS Dock | Built-in | Global Navigation | Bottom-center floating dock with spring magnification, micro-tooltips, accessible keyboard navigation |
 | ShimmerButton | 21st.dev / Magic UI | Built-in | Primary CTAs | Rotating conic-gradient border shimmer beam with token-styled interior surface |
+| ImagesScrollingAnimation | 21st.dev | https://21st.dev/r/images-scrolling-animation | Work Category Showcase (`/work/[category]`) | Sticky stacking card deck with scroll progress scaling (1.0 -> targetScale), dark obsidian token styling, responsive two-column project metadata and Apple Studio Display SVG previews |

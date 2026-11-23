@@ -3,6 +3,15 @@ import { vi } from "vitest";
 
 window.scrollTo = vi.fn();
 
+class MockResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+global.ResizeObserver = MockResizeObserver as unknown as typeof ResizeObserver;
+window.ResizeObserver = MockResizeObserver as unknown as typeof ResizeObserver;
+
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: (query: string) => ({

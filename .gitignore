@@ -20,8 +20,10 @@
 .DS_Store
 *.pem
 
-# debug
-npm-debug.log*
+# local captures and frames
+/screenshots/
+/frames/
+
 yarn-debug.log*
 yarn-error.log*
 

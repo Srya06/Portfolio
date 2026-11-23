@@ -166,13 +166,12 @@ export function StoryTimeline() {
             {story.map((_, i) => (
               <div
                 key={i}
-                className={`w-3.5 h-3.5 -ml-[6px] rounded-full transition-all duration-300 ${
-                  i === activeIndex
-                    ? "bg-white ring-4 ring-white/20 scale-125"
-                    : i < activeIndex
+                className={`w-3.5 h-3.5 -ml-[6px] rounded-full transition-all duration-300 ${i === activeIndex
+                  ? "bg-white ring-4 ring-white/20 scale-125"
+                  : i < activeIndex
                     ? "bg-white/60"
                     : "bg-white/20 border border-white/40"
-                }`}
+                  }`}
               />
             ))}
           </div>
