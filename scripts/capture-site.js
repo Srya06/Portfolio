@@ -38,16 +38,11 @@ async function capture() {
   await page.screenshot({ path: path.join(screenshotsDir, "02-doors-wall.png") });
   console.log("Captured 02-doors-wall.png");
 
-  // 3. Scroll to Demonstrated Capabilities & Story Timeline
-  await page.locator("#capabilities").scrollIntoViewIfNeeded();
-  await page.waitForTimeout(800);
-  await page.screenshot({ path: path.join(screenshotsDir, "03-capabilities.png") });
-  console.log("Captured 03-capabilities.png");
-
+  // 3. Scroll to Story Timeline
   await page.locator("#story").scrollIntoViewIfNeeded();
   await page.waitForTimeout(800);
-  await page.screenshot({ path: path.join(screenshotsDir, "04-story-timeline.png") });
-  console.log("Captured 04-story-timeline.png");
+  await page.screenshot({ path: path.join(screenshotsDir, "03-story-timeline.png") });
+  console.log("Captured 03-story-timeline.png");
 
   // 4. Contact Flow Modal
   await page.locator("#contact").scrollIntoViewIfNeeded();

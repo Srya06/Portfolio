@@ -29,7 +29,7 @@ describe("Navigation & Layout Components", () => {
     render(<Menu isOpen={true} onClose={() => { closed = true; }} />);
     expect(screen.getByText("Selected Work")).toBeInTheDocument();
     expect(screen.getByText("My Story")).toBeInTheDocument();
-    expect(screen.getByText("Capabilities")).toBeInTheDocument();
+    expect(screen.getByText("Contact Flow")).toBeInTheDocument();
 
     fireEvent.keyDown(window, { key: "Escape" });
     expect(closed).toBe(true);

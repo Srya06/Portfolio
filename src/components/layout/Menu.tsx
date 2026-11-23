@@ -13,10 +13,9 @@ interface MenuProps {
 }
 
 const navLinks = [
-  { href: "#work", label: "Selected Work", number: "01", blurb: "6 verified applied AI and full-stack projects" },
-  { href: "#capabilities", label: "Capabilities", number: "02", blurb: "Core ML, agentic systems, and development stack" },
-  { href: "#story", label: "My Story", number: "03", blurb: "Education, background, and trajectory" },
-  { href: "#contact", label: "Contact Flow", number: "04", blurb: "Start a conversation or recruitment inquiry" },
+  { href: "#work", label: "Selected Work", number: "01", blurb: "4 discipline portals & verified AI/full-stack projects" },
+  { href: "#story", label: "My Story", number: "02", blurb: "Education, background, and trajectory" },
+  { href: "#contact", label: "Contact Flow", number: "03", blurb: "Start a conversation or project inquiry" },
 ];
 
 export function Menu({ isOpen, onClose }: MenuProps) {

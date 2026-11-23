@@ -63,15 +63,20 @@ export function FlipCalendar() {
         </div>
 
         {/* Flipped Content Leaf */}
-        <div className="min-h-[74px] sm:min-h-[88px] flex items-center justify-start mt-2" style={{ perspective: 1000 }}>
+        <div className="min-h-[74px] sm:min-h-[88px] flex items-center justify-start mt-2" style={{ perspective: 1200, transformStyle: "preserve-3d" }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={currentRole.title}
-              initial={prefersReduced ? { opacity: 0 } : { rotateX: -70, opacity: 0, y: -10 }}
+              initial={prefersReduced ? { opacity: 0 } : { rotateX: -65, opacity: 0, y: -6 }}
               animate={{ rotateX: 0, opacity: 1, y: 0 }}
-              exit={prefersReduced ? { opacity: 0 } : { rotateX: 70, opacity: 0, y: 10 }}
-              transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
-              style={{ transformOrigin: "top center" }}
+              exit={prefersReduced ? { opacity: 0 } : { rotateX: 65, opacity: 0, y: 6 }}
+              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                transformOrigin: "top center",
+                transformStyle: "preserve-3d",
+                backfaceVisibility: "hidden",
+                willChange: "transform, opacity",
+              }}
               className="w-full flex items-center justify-between"
             >
               <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] font-extrabold tracking-tight text-[#1A1818] leading-tight font-sans">

@@ -17,12 +17,10 @@ interface DoorCardProps {
 
 export function DoorCard({
   door,
-  index = 0,
   isActive = false,
   onActivate = () => {},
   isAnyActive = false,
 }: DoorCardProps) {
-  void index;
   const router = useRouter();
   const prefersReduced = useReducedMotion();
 
@@ -43,13 +41,13 @@ export function DoorCard({
 
   return (
     <div
-      className={`relative shrink-0 transition-all duration-500 ease-out flex items-center justify-center select-none ${
+      className={`relative shrink-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center select-none ${
         isActive
           ? "w-full md:w-[620px] z-30"
           : isAnyActive
-          ? "w-[160px] sm:w-[200px] opacity-40 hover:opacity-80 scale-95 z-10"
-          : "w-[220px] sm:w-[260px] md:w-[280px] z-20"
-      }`}
+          ? "w-[160px] sm:w-[200px] opacity-40 hover:opacity-85 scale-95 z-10"
+          : "w-[220px] sm:w-[260px] md:w-[280px] z-20 hover:scale-[1.01]"
+        }`}
     >
       <div className="flex flex-col md:flex-row items-center gap-6 w-full">
         {/* The Arched Roman Door Unit */}
@@ -67,7 +65,7 @@ export function DoorCard({
           onKeyDown={handleKeyDown}
           aria-label={`${door.title} architectural door. Click to enter.`}
           aria-expanded={isActive}
-          style={{ perspective: 1400 }}
+          style={{ perspective: 1400, transformStyle: "preserve-3d" }}
           className="relative w-[220px] sm:w-[260px] aspect-[9/18] rounded-t-full bg-[#181616] p-2.5 sm:p-3 border-2 border-[#2C2727] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent shrink-0"
         >
           {/* Arched Inner Jamb / Door Frame */}
@@ -85,7 +83,7 @@ export function DoorCard({
                     initial={{ opacity: 0, scale: 0.85 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.85 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     className="z-20 -mt-10"
                   >
                     <button
@@ -111,9 +109,12 @@ export function DoorCard({
                   ? { rotateY: -62, scaleX: 0.96 }
                   : { rotateY: 0, scaleX: 1 }
               }
-              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 transformOrigin: "left center",
+                transformStyle: "preserve-3d",
+                backfaceVisibility: "hidden",
+                willChange: "transform",
                 backgroundColor: door.doorColor,
               }}
               className="absolute inset-0 rounded-t-full shadow-[inset_0_0_20px_rgba(0,0,0,0.6)] border border-white/10 flex flex-col items-center justify-between py-6 px-4 cursor-pointer"
