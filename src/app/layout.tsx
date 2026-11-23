@@ -8,7 +8,6 @@ import { BackgroundGrid } from "@/components/motion/BackgroundGrid";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { LampPullCord } from "@/components/layout/LampPullCord";
 import { FloatingBackToTop } from "@/components/layout/FloatingBackToTop";
 
 const onest = Onest({
@@ -101,9 +100,8 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  var saved = localStorage.getItem('theme');
-                  var theme = saved || 'dark';
-                  document.documentElement.setAttribute('data-theme', theme);
+                  localStorage.removeItem('theme');
+                  document.documentElement.setAttribute('data-theme', 'dark');
                 } catch (e) {}
               })();
             `,
@@ -114,7 +112,6 @@ export default function RootLayout({
         <ThemeProvider>
           <SmoothScroll>
             <BackgroundGrid />
-            <LampPullCord />
             <Nav />
             <main id="main-content" className="flex-1 focus:outline-none relative z-10" tabIndex={-1}>
               {children}
