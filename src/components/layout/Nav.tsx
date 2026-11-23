@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu as MenuIcon } from "lucide-react";
 import { site } from "@/content/site";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
@@ -17,6 +18,7 @@ const navDisciplines = [
 
 export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
   const { scrollDirection, isAtTop } = useScrollDirection();
 
   // Hide nav on scroll down, show on scroll up
@@ -52,20 +54,30 @@ export function Nav() {
             </span>
           </Link>
 
-          {/* Desktop Navigation Links matching therishithakor.com */}
-          <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-6 text-xs font-medium text-fg-muted">
-            <Link href="/" className="hover:text-fg transition-colors">
+          {/* Desktop Navigation Links matching frames */}
+          <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-7 text-xs font-medium text-fg-muted">
+            <Link
+              href="/"
+              className={`transition-colors ${
+                pathname === "/" ? "text-white font-semibold underline underline-offset-8 decoration-2" : "hover:text-fg"
+              }`}
+            >
               Home
             </Link>
-            {navDisciplines.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="hover:text-fg transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navDisciplines.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`transition-colors ${
+                    isActive ? "text-white font-semibold underline underline-offset-8 decoration-2" : "hover:text-fg"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <Link href="/#story" className="hover:text-fg transition-colors">
               My story
             </Link>

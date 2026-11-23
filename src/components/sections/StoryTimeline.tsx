@@ -4,32 +4,13 @@ import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  GraduationCap,
-  Users,
-  Cpu,
-  Sparkles,
-  Code2,
-  ChevronUp,
-  ChevronDown,
-  MapPin,
-  Calendar,
-} from "lucide-react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 import { story } from "@/content/story";
-import { RollingCounter } from "@/components/motion/RollingCounter";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-if (typeof window !== "undefined") {
+if (typeof window !== "undefined" && process.env.NODE_ENV !== "test") {
   gsap.registerPlugin(ScrollTrigger);
 }
-
-const icons = {
-  education: GraduationCap,
-  community: Users,
-  ai: Cpu,
-  product: Code2,
-  work: Sparkles,
-};
 
 export function StoryTimeline() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -70,7 +51,6 @@ export function StoryTimeline() {
   }, [prefersReducedMotion]);
 
   const activeMilestone = story[activeIndex];
-  const ActiveIcon = icons[activeMilestone.type] || Sparkles;
 
   const handlePrev = () => {
     setActiveIndex((prev) => Math.max(0, prev - 1));
@@ -97,86 +77,101 @@ export function StoryTimeline() {
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="region"
-      aria-label="Candidate journey and education timeline"
-      className="relative min-h-screen py-16 lg:py-24 flex flex-col justify-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded-3xl"
+      aria-label="Candidate journey and background timeline"
+      className="relative min-h-screen py-16 lg:py-24 flex flex-col justify-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto focus-visible:outline-none select-none"
     >
-      {/* Background ambient gradient */}
-      <div
-        className="pointer-events-none absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[300px] bg-accent/5 rounded-full blur-[140px]"
-        aria-hidden="true"
-      />
-
-      {/* Desktop Pinned Timeline Layout */}
+      {/* Desktop Pinned Timeline Layout matching frame-01-30.0.png */}
       <div className="hidden lg:grid grid-cols-12 gap-12 items-center">
-        {/* Left Column (Cols 1-5): Counter, Section Badge, Milestone Category */}
-        <div className="col-span-5 space-y-8">
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-bg-elev text-xs font-mono text-accent">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>03 // BACKGROUND &amp; MILESTONES</span>
+        {/* Left Column (Cols 1-5): Eyebrow, 'Let's go back in time', Radar watermark, Giant Year */}
+        <div className="col-span-5 space-y-6 sticky top-32">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-[#A8A196]">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              <span>• My story // My Engineering Story</span>
             </div>
-            <h2 className="text-4xl font-bold tracking-tight text-fg">
-              My Engineering Story
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white font-sans leading-[1.05]">
+              Let&apos;s go back in time.
             </h2>
-            <p className="text-sm text-fg-muted max-w-sm">
-              Academic rigor, student mentoring, and applied AI systems architecture.
-            </p>
           </div>
 
-          {/* Rolling Number Counter */}
-          <div className="space-y-3 pt-2">
-            <RollingCounter
-              current={activeIndex + 1}
-              total={story.length}
-              className="text-6xl sm:text-8xl"
-            />
-            <div className="flex items-center gap-3">
-              <span className="px-3 py-1 rounded-md border border-line bg-bg-elev text-xs font-mono text-accent font-medium">
-                {activeMilestone.category}
+          {/* Radar Watermark + Giant Year Typography */}
+          <div className="relative pt-4">
+            <svg
+              className="absolute -left-10 -top-8 w-96 h-96 opacity-[0.06] pointer-events-none text-white stroke-current fill-none"
+              viewBox="0 0 200 200"
+            >
+              <circle cx="100" cy="100" r="90" strokeWidth="1" strokeDasharray="4 6" />
+              <circle cx="100" cy="100" r="70" strokeWidth="1" />
+              <circle cx="100" cy="100" r="45" strokeWidth="1" strokeDasharray="2 4" />
+              <line x1="100" y1="5" x2="100" y2="195" strokeWidth="0.5" />
+              <line x1="5" y1="100" x2="195" y2="100" strokeWidth="0.5" />
+            </svg>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeMilestone.year || activeMilestone.period}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3 }}
+                className="relative z-10"
+              >
+                <div className="text-7xl sm:text-9xl font-black tracking-tighter text-white font-sans select-none">
+                  {activeMilestone.year || "2026"}
+                </div>
+                <p className="text-xs font-mono uppercase tracking-widest text-[#B5AFA6] font-semibold mt-1">
+                  {activeMilestone.period}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Step Counter & Horizontal Progress Bar */}
+            <div className="flex items-center gap-3 pt-4">
+              <span className="text-xs font-mono text-white/60">
+                0{activeIndex + 1} / 0{story.length}
               </span>
-              <span className="text-xs font-mono text-fg-muted flex items-center gap-1">
-                <Calendar className="w-3.5 h-3.5 text-accent" />
-                <span>{activeMilestone.period}</span>
-              </span>
+              <div className="w-32 h-[2px] bg-white/20 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-white transition-all duration-300"
+                  style={{ width: `${((activeIndex + 1) / story.length) * 100}%` }}
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Stepper Navigation Buttons */}
-          <div className="flex items-center gap-3 pt-4">
-            <button
-              onClick={handlePrev}
-              disabled={activeIndex === 0}
-              className="w-10 h-10 rounded-full border border-line bg-bg-elev flex items-center justify-center text-fg hover:text-accent hover:border-accent disabled:opacity-30 disabled:pointer-events-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              aria-label="Previous story milestone"
-            >
-              <ChevronUp className="w-5 h-5" />
-            </button>
-            <button
-              onClick={handleNext}
-              disabled={activeIndex === story.length - 1}
-              className="w-10 h-10 rounded-full border border-line bg-bg-elev flex items-center justify-center text-fg hover:text-accent hover:border-accent disabled:opacity-30 disabled:pointer-events-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              aria-label="Next story milestone"
-            >
-              <ChevronDown className="w-5 h-5" />
-            </button>
-            <span className="text-xs font-mono text-fg-muted">
-              SCROLL OR USE ARROWS
-            </span>
+            {/* Prev / Next controls */}
+            <div className="flex items-center gap-2 pt-6">
+              <button
+                onClick={handlePrev}
+                disabled={activeIndex === 0}
+                className="w-8 h-8 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white hover:bg-white hover:text-black disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                aria-label="Previous story milestone"
+              >
+                <ChevronUp className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleNext}
+                disabled={activeIndex === story.length - 1}
+                className="w-8 h-8 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white hover:bg-white hover:text-black disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                aria-label="Next story milestone"
+              >
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Center Progress Rail (Col 6) */}
-        <div className="col-span-1 flex flex-col items-center justify-center h-80">
-          <div className="relative w-[2px] h-full bg-line/80 rounded-full flex flex-col justify-between py-2">
+        {/* Center Vertical Timeline Rail with Glowing White Node */}
+        <div className="col-span-1 flex flex-col items-center justify-center h-96">
+          <div className="relative w-[2px] h-full bg-white/20 rounded-full flex flex-col justify-between py-2">
             {story.map((_, i) => (
               <div
                 key={i}
-                className={`w-3 h-3 -ml-[5px] rounded-full transition-all duration-300 ${
+                className={`w-3.5 h-3.5 -ml-[6px] rounded-full transition-all duration-300 ${
                   i === activeIndex
-                    ? "bg-accent ring-4 ring-accent/20 scale-125"
+                    ? "bg-white ring-4 ring-white/20 scale-125"
                     : i < activeIndex
-                    ? "bg-accent/60"
-                    : "bg-line border border-fg-muted/40"
+                    ? "bg-white/60"
+                    : "bg-white/20 border border-white/40"
                 }`}
               />
             ))}
@@ -192,43 +187,31 @@ export function StoryTimeline() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full p-8 rounded-3xl border border-line bg-bg-elev/80 backdrop-blur-md shadow-2xl space-y-6"
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full p-8 rounded-3xl border border-white/10 bg-[#161414]/90 backdrop-blur-md shadow-2xl space-y-5"
               >
                 {/* Header */}
-                <div className="flex items-start justify-between gap-4">
-                  <div className="space-y-1">
-                    <span className="text-xs font-mono text-accent uppercase">
-                      {activeMilestone.organisation}
-                    </span>
-                    <h3 className="text-2xl font-bold tracking-tight text-fg">
-                      {activeMilestone.title}
-                    </h3>
-                  </div>
-
-                  <div className="w-12 h-12 rounded-2xl bg-bg border border-line flex items-center justify-center text-accent shrink-0 shadow-sm">
-                    <ActiveIcon className="w-6 h-6" />
-                  </div>
-                </div>
-
-                {/* Location and Period Row */}
-                <div className="flex items-center gap-4 text-xs font-mono text-fg-muted border-y border-line/60 py-3">
-                  <span className="flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-accent" />
-                    <span>{activeMilestone.location}</span>
-                  </span>
-                  <span>·</span>
-                  <span className="text-accent font-medium">
+                <div className="space-y-1">
+                  <span className="text-xs font-mono uppercase tracking-widest text-[#A8A196]">
                     {activeMilestone.period}
                   </span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-sans leading-tight">
+                    {activeMilestone.title}
+                  </h3>
+                  <p className="text-xs font-medium text-accent">
+                    {activeMilestone.organisation} · {activeMilestone.location}
+                  </p>
                 </div>
 
-                {/* Bullets */}
-                <ul className="space-y-3 text-sm text-fg-muted">
-                  {activeMilestone.bullets.map((bullet, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <span className="text-accent mt-1 text-xs">◆</span>
-                      <span className="leading-relaxed">{bullet}</span>
+                {/* Bullets with dashes matching frame-01-30.0.png */}
+                <ul className="space-y-2.5 pt-2">
+                  {activeMilestone.bullets.map((bullet, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2.5 text-sm text-[#C4BFB6] font-normal leading-relaxed"
+                    >
+                      <span className="text-white/40 shrink-0 mt-0.5">–</span>
+                      <span>{bullet}</span>
                     </li>
                   ))}
                 </ul>
@@ -238,63 +221,46 @@ export function StoryTimeline() {
         </div>
       </div>
 
-      {/* Mobile & Reduced-Motion Stacked Layout */}
+      {/* Mobile Stacked Layout */}
       <div className="lg:hidden space-y-8">
         <div className="space-y-2 border-b border-line pb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-bg-elev text-xs font-mono text-accent">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>03 // BACKGROUND &amp; MILESTONES</span>
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#A8A196]">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+            <span>• My story</span>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-fg">
+          <h2 className="text-3xl font-bold tracking-tight text-white font-sans">
             My Engineering Story
           </h2>
-          <p className="text-sm text-fg-muted">
-            Academic training at MIT Mysore, student mentoring, and applied AI initiatives.
-          </p>
         </div>
 
         <div className="space-y-6">
-          {story.map((item, index) => {
-            const ItemIcon = icons[item.type] || Sparkles;
-            return (
-              <div
-                key={item.id}
-                className="p-6 rounded-2xl border border-line bg-bg-elev/70 space-y-4 shadow-md"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono text-accent">
-                    0{index + 1} / 0{story.length}
-                  </span>
-                  <span className="text-xs font-mono text-fg-muted px-2 py-0.5 rounded border border-line">
-                    {item.period}
-                  </span>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-bg border border-line flex items-center justify-center text-accent shrink-0">
-                    <ItemIcon className="w-4 h-4" />
-                  </div>
-                  <div className="space-y-0.5">
-                    <h3 className="text-lg font-bold text-fg leading-tight">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs font-mono text-fg-muted">
-                      {item.organisation} · {item.location}
-                    </p>
-                  </div>
-                </div>
-
-                <ul className="space-y-2 text-xs text-fg-muted pt-2 border-t border-line/60">
-                  {item.bullets.map((bullet, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <span className="text-accent mt-0.5">◆</span>
-                      <span className="leading-relaxed">{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
+          {story.map((item) => (
+            <div
+              key={item.id}
+              className="p-6 rounded-2xl border border-white/10 bg-[#161414] space-y-4"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-2xl font-black text-white font-sans">
+                  {item.year || "2026"}
+                </span>
+                <span className="text-xs font-mono text-[#A8A196]">{item.period}</span>
               </div>
-            );
-          })}
+
+              <div>
+                <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                <p className="text-xs text-accent">{item.organisation}</p>
+              </div>
+
+              <ul className="space-y-2">
+                {item.bullets.map((b, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs text-[#C4BFB6]">
+                    <span className="text-white/40">–</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>

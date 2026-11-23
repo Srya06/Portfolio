@@ -21,6 +21,8 @@ export type PortfolioProject = {
   limitations: string;
   evidenceNeeded: string[];
   disclaimer?: string;
+  repoUrl?: string;
+  liveUrl?: string;
 };
 
 export type DoorCategory = {
@@ -38,6 +40,7 @@ export type StoryEntry = {
   id: string;
   type: "education" | "work" | "community" | "ai" | "product";
   period: string;
+  year?: string;
   category: string;
   title: string;
   organisation: string;
