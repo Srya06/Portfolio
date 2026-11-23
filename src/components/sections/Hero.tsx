@@ -2,7 +2,7 @@
 
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { FlipCalendar } from "@/components/motion/FlipCalendar";
-import { AbilityCard } from "@/components/sections/AbilityCard";
+import { HeroCharacter } from "@/components/sections/HeroCharacter";
 import { RoleMarquee } from "@/components/sections/RoleMarquee";
 
 export function Hero() {
@@ -64,13 +64,9 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Artisan Ability Card with 'My ability card' badge */}
+          {/* Right Column: Character Portrait with Interactive Liquid Reveal & Ability Card Modal */}
           <div className="lg:col-span-5 flex flex-col justify-center items-center relative">
-            <AbilityCard />
-            <div className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-line bg-bg-elev/80 backdrop-blur-sm text-xs font-mono text-fg shadow-sm hover:border-accent transition-colors">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span>My ability card</span>
-            </div>
+            <HeroCharacter />
           </div>
         </div>
 
