@@ -3,17 +3,16 @@
 import { useLocalTime } from "@/hooks/useLocalTime";
 
 export function Clock() {
-  const { formattedTime } = useLocalTime();
+  const { formattedFull, formattedTime } = useLocalTime();
 
   return (
     <div
-      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-line bg-bg-elev/80 text-[11px] font-mono text-fg-muted backdrop-blur-sm"
+      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-line bg-bg-elev/70 text-xs font-mono text-fg-muted backdrop-blur-sm shadow-xs"
       title="Surya's local time (Asia/Kolkata)"
-      aria-label={`Current local time in India: ${formattedTime || "Loading"}`}
+      aria-label={`Current local time: ${formattedFull || formattedTime || "Loading"}`}
     >
       <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" aria-hidden="true" />
-      <span>{formattedTime || "00:00"}</span>
-      <span className="text-[10px] text-fg-muted/70">IST</span>
+      <span>{formattedFull || `Local time ${formattedTime || "11:24am"}`}</span>
     </div>
   );
 }

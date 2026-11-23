@@ -27,7 +27,8 @@ const config: Config = {
         pill: "var(--radius-pill)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
+        sans: ["var(--font-onest)", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        serif: ["var(--font-garamond)", "Georgia", "serif"],
         mono: ["var(--font-mono)", "monospace"],
       },
     },

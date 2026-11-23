@@ -1,49 +1,42 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUp, Github, Linkedin, Mail, FileText } from "lucide-react";
+import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import { site } from "@/content/site";
 import { doors } from "@/content/doors";
 import { Clock } from "@/components/layout/Clock";
 import { AvailabilityPill } from "@/components/layout/AvailabilityPill";
 
 export function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <footer className="border-t border-line bg-bg-elev/40 pt-16 pb-12 mt-24">
+    <footer className="border-t border-line/60 bg-bg-elev/40 pt-16 pb-12 mt-20 select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Navigation & Status Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-16 border-b border-line/60">
+        {/* Navigation & Status Grid matching Screenshot 7 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 pb-16 border-b border-line/60 text-xs">
           {/* Col 1: Bio & Positioning */}
           <div className="space-y-4 md:col-span-1">
-            <div className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-md bg-bg-elev border border-line flex items-center justify-center font-mono text-xs font-bold text-accent">
+            <div className="flex items-center gap-2.5">
+              <span className="w-7 h-7 rounded-lg bg-bg-elev border border-line flex items-center justify-center font-mono text-xs font-bold text-accent shadow-xs">
                 S
               </span>
-              <span className="font-semibold text-sm tracking-tight text-fg">
+              <span className="font-bold text-sm tracking-tight text-fg">
                 {site.name}
               </span>
             </div>
-            <p className="text-xs text-fg-muted leading-relaxed">
+            <p className="text-xs text-fg-muted leading-relaxed font-normal">
               {site.tagline}
             </p>
-            <div className="pt-2">
+            <div className="pt-1">
               <AvailabilityPill label={site.availability} />
             </div>
           </div>
 
-          {/* Col 2: Work Categories */}
+          {/* Col 2: WORK */}
           <div className="space-y-3">
-            <p className="text-xs font-mono text-accent uppercase tracking-wider">
-              Selected Disciplines
+            <p className="text-xs font-mono text-fg uppercase tracking-widest font-semibold">
+              WORK
             </p>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5">
               {doors.map((door) => (
                 <li key={door.slug}>
                   <Link
@@ -57,30 +50,30 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Navigation */}
+          {/* Col 3: NAVIGATE */}
           <div className="space-y-3">
-            <p className="text-xs font-mono text-accent uppercase tracking-wider">
-              Navigation
+            <p className="text-xs font-mono text-fg uppercase tracking-widest font-semibold">
+              NAVIGATE
             </p>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5">
               <li>
-                <Link href="#work" className="text-fg-muted hover:text-fg transition-colors">
-                  Featured Projects
+                <Link href="/" className="text-fg-muted hover:text-fg transition-colors">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="#capabilities" className="text-fg-muted hover:text-fg transition-colors">
-                  Capabilities & Stack
+                <Link href="/#work" className="text-fg-muted hover:text-fg transition-colors">
+                  The Doors
                 </Link>
               </li>
               <li>
-                <Link href="#story" className="text-fg-muted hover:text-fg transition-colors">
-                  My Story Timeline
+                <Link href="/#story" className="text-fg-muted hover:text-fg transition-colors">
+                  My story
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="text-fg-muted hover:text-fg transition-colors">
-                  Contact & Inquiry
+                <Link href="/#contact" className="text-fg-muted hover:text-fg transition-colors">
+                  Contact
                 </Link>
               </li>
               <li>
@@ -88,27 +81,31 @@ export function Footer() {
                   href={site.resumePath}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-fg-muted hover:text-fg transition-colors inline-flex items-center gap-1"
+                  className="text-fg-muted hover:text-fg transition-colors inline-flex items-center gap-1.5"
                 >
-                  <FileText className="w-3 h-3" />
+                  <FileText className="w-3.5 h-3.5" />
                   <span>Resume (PDF)</span>
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Status & Connect */}
+          {/* Col 4: STATUS */}
           <div className="space-y-3">
-            <p className="text-xs font-mono text-accent uppercase tracking-wider">
-              Connect & Timezone
+            <p className="text-xs font-mono text-fg uppercase tracking-widest font-semibold">
+              STATUS
             </p>
-            <div className="space-y-2.5 text-xs text-fg-muted">
+            <div className="space-y-3 text-fg-muted">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-success" />
+                <span>Available for work</span>
+              </div>
               <div>
+                <span>Remote-first, worldwide</span>
+              </div>
+              <div className="pt-1">
                 <Clock />
               </div>
-              <p className="text-[11px] font-mono text-fg-muted/80">
-                Location: {site.location}
-              </p>
               <div className="flex items-center gap-3 pt-2">
                 <a
                   href={site.github}
@@ -131,7 +128,7 @@ export function Footer() {
                 <a
                   href={`mailto:${site.email}`}
                   className="w-8 h-8 rounded-full border border-line bg-bg-elev flex items-center justify-center text-fg-muted hover:text-accent hover:border-accent transition-colors"
-                  aria-label={`Email ${site.email}`}
+                  aria-label="Email Inquiry"
                 >
                   <Mail className="w-4 h-4" />
                 </a>
@@ -140,30 +137,14 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Wordmark & Back-to-Top Row */}
-        <div className="py-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
-          <div className="select-none">
-            <span className="text-5xl sm:text-7xl md:text-9xl font-extrabold tracking-tighter text-line/80 hover:text-line transition-colors">
-              SURYA D
-            </span>
+        {/* Bottom Credits & Copyright */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-fg-muted">
+          <div>
+            © {new Date().getFullYear()} {site.name}. All rights reserved.
           </div>
-
-          <button
-            onClick={scrollToTop}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-line bg-bg-elev text-xs font-mono text-fg hover:text-accent hover:border-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            aria-label="Scroll back to top of page"
-          >
-            <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
-        </div>
-
-        {/* Legal & Attribution Bar */}
-        <div className="pt-6 border-t border-line/40 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-fg-muted gap-4">
-          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
-          <p>
-            Designed & Engineered with Next.js, Motion, and Lenis · Asia/Kolkata
-          </p>
+          <div className="text-[11px] text-fg-muted/70">
+            Crafted with Onest typography, Next.js &amp; Tailwind CSS
+          </div>
         </div>
       </div>
     </footer>

@@ -12,19 +12,32 @@ export function useLocalTime(options: LocalTimeOptions = {}) {
   const updateIntervalMs = options.updateIntervalMs ?? 30000;
 
   const [formattedTime, setFormattedTime] = useState<string>("");
+  const [formattedFull, setFormattedFull] = useState<string>("");
 
   useEffect(() => {
     function formatTime() {
       try {
-        const formatter = new Intl.DateTimeFormat("en-US", {
+        const now = new Date();
+        const timeFormatter = new Intl.DateTimeFormat("en-US", {
           hour: "numeric",
           minute: "2-digit",
           hour12: true,
           timeZone,
         });
-        setFormattedTime(formatter.format(new Date()));
+        const dateFormatter = new Intl.DateTimeFormat("en-US", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          timeZone,
+        });
+        const timePart = timeFormatter.format(now).toLowerCase();
+        const datePart = dateFormatter.format(now);
+        setFormattedTime(timePart);
+        setFormattedFull(`Local time ${timePart} · ${datePart}`);
       } catch {
-        setFormattedTime(new Date().toLocaleTimeString());
+        const fallback = new Date().toLocaleTimeString();
+        setFormattedTime(fallback);
+        setFormattedFull(`Local time ${fallback}`);
       }
     }
 
@@ -33,5 +46,5 @@ export function useLocalTime(options: LocalTimeOptions = {}) {
     return () => clearInterval(interval);
   }, [timeZone, updateIntervalMs]);
 
-  return { formattedTime, timeZone };
+  return { formattedTime, formattedFull, timeZone };
 }

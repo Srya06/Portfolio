@@ -9,9 +9,9 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { Nav } from "@/components/layout/Nav";
 
 describe("Navigation & Layout Components", () => {
-  it("renders Clock with IST label", () => {
+  it("renders Clock with local time label", () => {
     render(<Clock />);
-    expect(screen.getByText("IST")).toBeInTheDocument();
+    expect(screen.getByText(/Local time/i)).toBeInTheDocument();
   });
 
   it("renders AvailabilityPill with default label", () => {
@@ -35,21 +35,23 @@ describe("Navigation & Layout Components", () => {
     expect(closed).toBe(true);
   });
 
-  it("renders Footer with wordmark and navigation links", () => {
+  it("renders Footer with wordmark and navigation columns", () => {
     render(<Footer />);
-    expect(screen.getByText("SURYA D")).toBeInTheDocument();
-    expect(screen.getByText("Back to top")).toBeInTheDocument();
-    expect(screen.getByText("Featured Projects")).toBeInTheDocument();
+    expect(screen.getByText("Surya D")).toBeInTheDocument();
+    expect(screen.getByText("WORK")).toBeInTheDocument();
+    expect(screen.getByText("NAVIGATE")).toBeInTheDocument();
+    expect(screen.getByText("STATUS")).toBeInTheDocument();
   });
 
-  it("renders Nav with brand and triggers Menu modal", () => {
+  it("renders Nav with brand and main navigation links", () => {
     render(
       <ThemeProvider>
         <Nav />
       </ThemeProvider>
     );
     expect(screen.getByText("Surya D")).toBeInTheDocument();
-    const menuBtn = screen.getByRole("button", { name: /open full-screen navigation menu/i });
-    expect(menuBtn).toBeInTheDocument();
+    expect(screen.getByText("Home")).toBeInTheDocument();
+    expect(screen.getByText("My story")).toBeInTheDocument();
+    expect(screen.getByText("Contact")).toBeInTheDocument();
   });
 });

@@ -1,41 +1,30 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { motion } from "motion/react";
-import { ArrowRight, Layers, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-
-export interface DoorData {
-  slug: string;
-  title: string;
-  blurb: string;
-  image: string;
-  accent: string;
-  accentColor: string;
-  projectCount: number;
-  disciplines: readonly string[];
-}
+import type { DoorItem } from "@/content/doors";
 
 interface DoorCardProps {
-  door: DoorData;
-  index: number;
+  door: DoorItem;
+  index?: number;
+  isActive?: boolean;
+  onActivate?: () => void;
+  onDeactivate?: () => void;
+  isAnyActive?: boolean;
 }
 
-export function DoorCard({ door, index }: DoorCardProps) {
+export function DoorCard({
+  door,
+  index = 0,
+  isActive = false,
+  onActivate = () => {},
+  isAnyActive = false,
+}: DoorCardProps) {
+  void index;
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
-
-  const handleMouseEnter = () => {
-    setIsOpen(true);
-    router.prefetch(`/work/${door.slug}`);
-  };
-
-  const handleMouseLeave = () => {
-    setIsOpen(false);
-  };
+  const prefersReduced = useReducedMotion();
 
   const handleNavigate = () => {
     router.push(`/work/${door.slug}`);
@@ -44,163 +33,173 @@ export function DoorCard({ door, index }: DoorCardProps) {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      handleNavigate();
+      if (!isActive) {
+        onActivate();
+      } else {
+        handleNavigate();
+      }
     }
   };
 
-  const numberPadded = (index + 1).toString().padStart(2, "0");
-
   return (
     <div
-      style={{ perspective: 1200 }}
-      className="relative shrink-0 w-[290px] sm:w-[325px] aspect-[10/16] select-none py-2"
+      className={`relative shrink-0 transition-all duration-500 ease-out flex items-center justify-center select-none ${
+        isActive
+          ? "w-full md:w-[620px] z-30"
+          : isAnyActive
+          ? "w-[160px] sm:w-[200px] opacity-40 hover:opacity-80 scale-95 z-10"
+          : "w-[220px] sm:w-[260px] md:w-[280px] z-20"
+      }`}
     >
-      <div
-        role="button"
-        tabIndex={0}
-        onClick={handleNavigate}
-        onKeyDown={handleKeyDown}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onFocus={handleMouseEnter}
-        onBlur={handleMouseLeave}
-        aria-label={`Open ${door.title} category door. Contains ${door.projectCount} verified projects.`}
-        className="group relative w-full h-full rounded-2xl border border-line bg-[#1E1B1B] p-5 flex flex-col justify-between cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent overflow-hidden transition-all duration-300 hover:border-line/90 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]"
-      >
-        {/* Interior Chamber (Revealed when door swings open) */}
+      <div className="flex flex-col md:flex-row items-center gap-6 w-full">
+        {/* The Arched Roman Door Unit */}
         <div
-          className="absolute inset-0 p-5 flex flex-col justify-between bg-[#151313] z-0"
-          aria-hidden={!isOpen}
+          role="button"
+          tabIndex={0}
+          onClick={() => {
+            if (!isActive) {
+              onActivate();
+            } else {
+              handleNavigate();
+            }
+          }}
+          onMouseEnter={onActivate}
+          onKeyDown={handleKeyDown}
+          aria-label={`${door.title} architectural door. Click to enter.`}
+          aria-expanded={isActive}
+          style={{ perspective: 1400 }}
+          className="relative w-[220px] sm:w-[260px] aspect-[9/18] rounded-t-full bg-[#181616] p-2.5 sm:p-3 border-2 border-[#2C2727] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent shrink-0"
         >
-          {/* Chamber Artwork */}
-          <div className="relative w-full h-44 rounded-xl overflow-hidden border border-line/60 bg-[#1A1818]">
-            <Image
-              src={door.image}
-              alt={door.title}
-              fill
-              className="object-cover opacity-85 group-hover:opacity-100 transition-opacity"
-            />
-            <div
-              className="absolute inset-0 bg-gradient-to-t from-[#151313] via-transparent to-transparent"
-              aria-hidden="true"
-            />
-          </div>
-
-          {/* Chamber Content Details */}
-          <div className="space-y-3 z-10">
-            <div className="flex items-center justify-between text-[11px] font-mono">
-              <span className="text-fg-muted uppercase tracking-wider">PROJECTS READY</span>
-              <span
-                className="px-2.5 py-0.5 rounded-full font-bold"
-                style={{ color: door.accentColor, backgroundColor: `${door.accentColor}18` }}
-              >
-                {door.projectCount} Verified
-              </span>
+          {/* Arched Inner Jamb / Door Frame */}
+          <div className="relative w-full h-full rounded-t-full bg-[#100E0E] overflow-hidden border border-[#221F1F] shadow-inner">
+            {/* Interior Room / Chamber behind open door */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#141212] via-[#0E0C0C] to-[#0A0909] flex flex-col items-center justify-center p-4">
+              <div
+                className="w-24 h-24 rounded-full blur-2xl opacity-40"
+                style={{ backgroundColor: door.accentColor }}
+              />
+              {/* 'Click to enter' pill button visible when door swings open */}
+              <AnimatePresence>
+                {isActive && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.85 }}
+                    transition={{ duration: 0.3 }}
+                    className="z-20 -mt-10"
+                  >
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleNavigate();
+                      }}
+                      className="px-4 py-2 rounded-full bg-[#FAF8F5] text-[#1A1818] font-bold text-xs shadow-lg hover:scale-105 active:scale-95 transition-transform flex items-center gap-1.5"
+                    >
+                      <span>Click to enter</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
-            <p className="text-xs text-fg-muted line-clamp-2 leading-relaxed">
-              {door.blurb}
-            </p>
+            {/* The Swinging 3D Door Slab */}
+            <motion.div
+              initial={false}
+              animate={
+                isActive && !prefersReduced
+                  ? { rotateY: -62, scaleX: 0.96 }
+                  : { rotateY: 0, scaleX: 1 }
+              }
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                transformOrigin: "left center",
+                backgroundColor: door.doorColor,
+              }}
+              className="absolute inset-0 rounded-t-full shadow-[inset_0_0_20px_rgba(0,0,0,0.6)] border border-white/10 flex flex-col items-center justify-between py-6 px-4 cursor-pointer"
+            >
+              {/* Fluted Vertical Panel Lines Texture */}
+              <div
+                className="absolute inset-0 rounded-t-full opacity-35 pointer-events-none"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(to right, transparent, transparent 15px, rgba(0, 0, 0, 0.4) 15px, rgba(0, 0, 0, 0.4) 17px)",
+                }}
+              />
 
-            <div className="flex flex-wrap gap-1">
-              {door.disciplines.map((item) => (
-                <span
-                  key={item}
-                  className="px-2 py-0.5 rounded-full border border-line bg-black/40 text-[10px] font-mono text-fg-muted"
-                >
-                  {item}
+              {/* Polished Brass Engraved Nameplate at Top Center */}
+              <div className="relative z-10 mt-6 sm:mt-8 px-3.5 py-1.5 rounded-sm bg-gradient-to-br from-[#F5D77F] via-[#D4AC0D] to-[#9A7D0A] border border-[#FFE8A3] shadow-[0_4px_8px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                {/* Brass screw rivets */}
+                <div className="absolute top-1 left-1 w-1 h-1 rounded-full bg-[#7D6608]" />
+                <div className="absolute top-1 right-1 w-1 h-1 rounded-full bg-[#7D6608]" />
+                <div className="absolute bottom-1 left-1 w-1 h-1 rounded-full bg-[#7D6608]" />
+                <div className="absolute bottom-1 right-1 w-1 h-1 rounded-full bg-[#7D6608]" />
+
+                <span className="text-[10px] sm:text-[11px] font-black tracking-widest text-[#2A1F05] uppercase font-sans text-center px-1">
+                  {door.plateTitle || door.title}
                 </span>
-              ))}
-            </div>
-          </div>
+              </div>
 
-          {/* Chamber Action Button */}
-          <div
-            className="flex items-center justify-between pt-2 border-t border-line text-xs font-mono font-semibold transition-colors"
-            style={{ color: door.accentColor }}
-          >
-            <span>EXPLORE CATEGORY</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              {/* Brass Door Lever Handle & Keyhole */}
+              <div className="absolute right-3.5 sm:right-4 top-1/2 -translate-y-1/2 flex flex-col items-center z-10">
+                {/* Horizontal lever */}
+                <div className="relative flex items-center">
+                  <div className="w-9 sm:w-11 h-2 rounded-full bg-gradient-to-r from-[#D4AC0D] via-[#F5D77F] to-[#9A7D0A] shadow-[0_3px_6px_rgba(0,0,0,0.6)] border border-[#FFE8A3]/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#9A7D0A] -ml-1 border border-[#D4AC0D]" />
+                </div>
+                {/* Vertical keyhole escutcheon plate */}
+                <div className="w-3.5 h-6 rounded-sm bg-gradient-to-b from-[#F5D77F] via-[#D4AC0D] to-[#9A7D0A] mt-2 shadow-md flex items-center justify-center border border-[#FFE8A3]/30">
+                  <div className="w-1.5 h-2.5 bg-[#2A1F05] rounded-t-full rounded-b-xs" />
+                </div>
+              </div>
+
+              {/* Bottom Base Hairline */}
+              <div className="w-full h-1 bg-black/20 rounded-full" />
+            </motion.div>
           </div>
         </div>
 
-        {/* Swinging Door Front Leaf Panel */}
-        <motion.div
-          style={{
-            transformOrigin: "left center",
-            transformStyle: "preserve-3d",
-          }}
-          animate={
-            prefersReducedMotion
-              ? {}
-              : isOpen
-              ? { rotateY: -30, x: -10 }
-              : { rotateY: 0, x: 0 }
-          }
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 w-full h-full rounded-xl border border-line/80 bg-gradient-to-br from-[#282323] via-[#211D1D] to-[#1A1818] p-5 flex flex-col justify-between shadow-2xl backdrop-blur-md"
-        >
-          {/* Subtle warm stone texture sheen */}
-          <div
-            className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-tr from-transparent via-white/[0.02] to-transparent opacity-80"
-            aria-hidden="true"
-          />
-
-          {/* Door Header: Metal Plaque & Serial */}
-          <div className="relative z-10 flex items-center justify-between border-b border-line pb-3">
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-xs font-bold text-accent">
-                {numberPadded}
-              </span>
-              <span className="text-[10px] font-mono text-fg-muted uppercase tracking-wider">
-                PORTAL
-              </span>
-            </div>
-
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-line bg-black/30">
-              <span
-                className="w-1.5 h-1.5 rounded-full animate-pulse"
-                style={{ backgroundColor: door.accentColor }}
-              />
-              <span className="text-[10px] font-mono text-fg-muted uppercase">
-                {door.accent}
-              </span>
-            </div>
-          </div>
-
-          {/* Door Center Plaque & Title */}
-          <div className="relative z-10 space-y-3 my-auto py-4">
-            <div className="w-10 h-10 rounded-xl bg-black/40 border border-line flex items-center justify-center text-accent shadow-sm">
-              <Layers className="w-5 h-5" style={{ color: door.accentColor }} />
-            </div>
-
-            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-fg group-hover:text-accent transition-colors">
-              {door.title}
-            </h3>
-
-            <p className="text-xs text-fg-muted line-clamp-3 leading-relaxed">
-              {door.blurb}
-            </p>
-          </div>
-
-          {/* Door Bottom: Handle & Status Indicator */}
-          <div className="relative z-10 pt-4 border-t border-line flex items-center justify-between">
-            {/* Visual Door Handle Plate */}
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-7 rounded-sm bg-line/80 border border-line flex items-center justify-center">
-                <span className="w-0.5 h-4 bg-accent/60 rounded-full" />
+        {/* Revealed Category Overview Panel (Appears next to the opened door) */}
+        <AnimatePresence>
+          {isActive && (
+            <motion.div
+              initial={prefersReduced ? { opacity: 0 } : { opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={prefersReduced ? { opacity: 0 } : { opacity: 0, x: -20 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="w-full md:w-[320px] space-y-4 text-left p-2"
+            >
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-fg font-sans">
+                  {door.title}
+                </h3>
+                <p className="text-[11px] font-mono text-accent uppercase tracking-wider mt-1">
+                  {door.subtitle}
+                </p>
               </div>
-              <span className="text-[10px] font-mono text-fg-muted uppercase">
-                HOVER TO OPEN
-              </span>
-            </div>
 
-            <div className="text-[11px] font-mono flex items-center gap-1 text-fg-muted group-hover:text-fg transition-colors">
-              <Sparkles className="w-3 h-3 text-accent" />
-              <span>{door.projectCount} Repos</span>
-            </div>
-          </div>
-        </motion.div>
+              {/* Checklist */}
+              <ul className="space-y-2 pt-1">
+                {door.checklist.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-xs text-fg-muted font-normal">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                    <span className="leading-tight">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="pt-2">
+                <button
+                  onClick={handleNavigate}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FAF8F5] text-[#1A1818] font-bold text-xs hover:bg-white transition-all shadow-md active:scale-95"
+                >
+                  <span>Enter discipline portal</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

@@ -256,7 +256,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       </section>
 
       {/* Sequential Next Project Transition */}
-      <footer className="border-t border-line pt-12">
+      <footer className="border-t border-line pt-12 space-y-16">
         <Link
           href={`/work/${nextProject.category}/${nextProject.slug}`}
           className="group block p-8 rounded-3xl border border-line bg-bg-elev/60 hover:border-accent/80 transition-all space-y-3"
@@ -277,6 +277,41 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             {nextProject.summary}
           </p>
         </Link>
+
+        {/* Bottom CTA Section matching Screenshot 7 */}
+        <div className="pt-12 border-t border-line/60">
+          <div className="max-w-3xl space-y-6">
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-success uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+              <span>AVAILABLE FOR NEW WORK</span>
+            </div>
+
+            <div className="space-y-1">
+              <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-fg font-sans leading-tight">
+                Need something built?
+              </h2>
+              <h3 className="text-4xl sm:text-5xl font-bold tracking-tight text-fg-muted/60 font-sans leading-tight">
+                Let&apos;s make it happen.
+              </h3>
+            </div>
+
+            <p className="text-base text-fg-muted leading-relaxed font-normal max-w-2xl">
+              I&apos;m available for engineering roles and production AI/ML implementations. Tell me what you need and I&apos;ll get back to you within a day.
+            </p>
+
+            <div className="pt-2">
+              <Link
+                href="/#contact"
+                className="group inline-flex items-center gap-3.5 pl-6 pr-2.5 py-2.5 rounded-full bg-[#FAF8F5] text-[#1A1818] font-bold text-sm tracking-tight transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_10px_25px_rgba(0,0,0,0.35)] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <span>Hire me</span>
+                <span className="w-8 h-8 rounded-full bg-[#1A1818] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
       </footer>
     </article>
   );

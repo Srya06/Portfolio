@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Onest, EB_Garamond, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { site } from "@/content/site";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
@@ -9,10 +9,19 @@ import { BackgroundGrid } from "@/components/motion/BackgroundGrid";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { LampPullCord } from "@/components/layout/LampPullCord";
+import { FloatingBackToTop } from "@/components/layout/FloatingBackToTop";
 
-const inter = Inter({
+const onest = Onest({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-onest",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
+const garamond = EB_Garamond({
+  subsets: ["latin"],
+  variable: "--font-garamond",
   display: "swap",
 });
 
@@ -85,7 +94,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${mono.variable}`}>
+    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${onest.variable} ${garamond.variable} ${mono.variable}`}>
       <head>
         <JsonLd />
         <script
@@ -107,11 +116,13 @@ export default function RootLayout({
           <SmoothScroll>
             <BackgroundGrid />
             <CustomCursor />
+            <LampPullCord />
             <Nav />
             <main id="main-content" className="flex-1 focus:outline-none relative z-10" tabIndex={-1}>
               {children}
             </main>
             <Footer />
+            <FloatingBackToTop />
           </SmoothScroll>
         </ThemeProvider>
       </body>

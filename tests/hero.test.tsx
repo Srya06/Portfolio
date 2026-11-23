@@ -6,7 +6,7 @@ import { RoleMarquee } from "@/components/sections/RoleMarquee";
 import { Preloader } from "@/components/motion/Preloader";
 import { Hero } from "@/components/sections/Hero";
 
-describe("Chunk 2: Hero & Ability Card Components", () => {
+describe("Hero & Ability Card Components", () => {
   beforeEach(() => {
     sessionStorage.clear();
   });
@@ -61,10 +61,12 @@ describe("Chunk 2: Hero & Ability Card Components", () => {
     expect(onComplete).toHaveBeenCalled();
   });
 
-  it("renders Hero section with primary CTAs and positioning", () => {
+  it("renders Hero section with FlipCalendar and reference CTAs", () => {
     render(<Hero />);
-    expect(screen.getByText("See Selected Work")).toBeInTheDocument();
-    expect(screen.getByText("Initiate Contact")).toBeInTheDocument();
-    expect(screen.getByText("Resume (PDF)")).toBeInTheDocument();
+    expect(screen.getByText(/Hi, I'm Surya/i)).toBeInTheDocument();
+    expect(screen.getByText(/I am an/i)).toBeInTheDocument();
+    expect(screen.getByText("Hire me")).toBeInTheDocument();
+    expect(screen.getByText("See my work")).toBeInTheDocument();
+    expect(screen.getByText("My ability card")).toBeInTheDocument();
   });
 });

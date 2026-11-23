@@ -14,30 +14,28 @@ vi.mock("next/navigation", () => ({
   }),
 }));
 
-describe("Chunk 3: Doors Wall & DoorCard Components", () => {
-  it("renders DoorCard with title, blurb, and project count", () => {
+describe("Doors Wall & Architectural Arched DoorCard Components", () => {
+  it("renders DoorCard with brass plate title and arched frame", () => {
     const door = doors[0];
     render(<DoorCard door={door} index={0} />);
 
-    expect(screen.getByText(door.title)).toBeInTheDocument();
-    expect(screen.getAllByText(door.blurb).length).toBeGreaterThan(0);
-    expect(screen.getByText("01")).toBeInTheDocument();
-    expect(screen.getByText("EXPLORE CATEGORY")).toBeInTheDocument();
+    expect(screen.getByText(door.plateTitle || door.title)).toBeInTheDocument();
   });
 
-  it("handles DoorCard hover and prefetching", () => {
+  it("triggers activation on DoorCard interaction", () => {
     const door = doors[0];
-    render(<DoorCard door={door} index={0} />);
+    const onActivate = vi.fn();
+    render(<DoorCard door={door} index={0} onActivate={onActivate} />);
 
     const doorBtn = screen.getByRole("button", { name: new RegExp(door.title, "i") });
     fireEvent.mouseEnter(doorBtn);
 
-    expect(prefetchMock).toHaveBeenCalledWith(`/work/${door.slug}`);
+    expect(onActivate).toHaveBeenCalled();
   });
 
-  it("triggers router navigation on DoorCard click", () => {
+  it("triggers router navigation when active DoorCard is clicked", () => {
     const door = doors[1];
-    render(<DoorCard door={door} index={1} />);
+    render(<DoorCard door={door} index={1} isActive={true} />);
 
     const doorBtn = screen.getByRole("button", { name: new RegExp(door.title, "i") });
     fireEvent.click(doorBtn);
@@ -45,20 +43,13 @@ describe("Chunk 3: Doors Wall & DoorCard Components", () => {
     expect(pushMock).toHaveBeenCalledWith(`/work/${door.slug}`);
   });
 
-  it("renders DoorsWall with all 5 doors and navigation controls", () => {
+  it("renders DoorsWall with 'Magic happens behind the doors' headline", () => {
     render(<DoorsWall />);
 
-    expect(screen.getByText(/Engineering Doors Wall/i)).toBeInTheDocument();
-    expect(screen.getByText("5 SPECIALIZED DOMAINS")).toBeInTheDocument();
+    expect(screen.getByText(/Magic happens behind the doors/i)).toBeInTheDocument();
 
-    for (const door of doors) {
-      expect(screen.getByText(door.title)).toBeInTheDocument();
+    for (const door of doors.slice(0, 4)) {
+      expect(screen.getByText(door.plateTitle || door.title)).toBeInTheDocument();
     }
-
-    const prevBtn = screen.getByRole("button", { name: /scroll doors wall left/i });
-    const nextBtn = screen.getByRole("button", { name: /scroll doors wall right/i });
-
-    expect(prevBtn).toBeInTheDocument();
-    expect(nextBtn).toBeInTheDocument();
   });
 });
