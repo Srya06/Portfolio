@@ -241,7 +241,7 @@ export function HeroCharacter() {
             rotateX: prefersReduced ? 0 : tiltX,
             rotateY: prefersReduced ? 0 : tiltY,
           }}
-          className="group relative w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[520px] aspect-[819/1024] flex items-end justify-center cursor-pointer"
+          className="group relative w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[520px] aspect-[819/815] flex items-end justify-center cursor-pointer"
           onClick={() => setIsCardOpen(true)}
           role="button"
           tabIndex={0}
@@ -253,8 +253,14 @@ export function HeroCharacter() {
           }}
           aria-label="Surya D character portrait. Hover to reveal color or click to open ability card."
         >
-          {/* Base Black & White Character Portrait */}
-          <div className="relative w-full h-full flex items-end justify-center overflow-hidden">
+          {/* Base Black & White Character Portrait with seamless background blend */}
+          <div
+            className="relative w-full h-full flex items-end justify-center overflow-hidden"
+            style={{
+              WebkitMaskImage: "linear-gradient(to bottom, black 84%, transparent 100%)",
+              maskImage: "linear-gradient(to bottom, black 84%, transparent 100%)",
+            }}
+          >
             <Image
               src="/images/character-bw.webp"
               alt="Surya D character portrait"
@@ -280,7 +286,7 @@ export function HeroCharacter() {
               e.stopPropagation();
               setIsCardOpen(true);
             }}
-            className="absolute left-[8%] bottom-[14%] sm:bottom-[16%] z-10 inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-full border border-white/20 bg-[#161414]/85 backdrop-blur-md text-[#F3EEEC] text-xs font-semibold tracking-wide shadow-[0_10px_24px_-12px_rgba(0,0,0,0.7)] hover:bg-[#1A1818] hover:border-white/40 hover:-translate-y-0.5 active:scale-95 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="absolute left-[6%] bottom-[4%] sm:bottom-[6%] z-10 inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-full border border-white/20 bg-[#161414]/85 backdrop-blur-md text-[#F3EEEC] text-xs font-semibold tracking-wide shadow-[0_10px_24px_-12px_rgba(0,0,0,0.7)] hover:bg-[#1A1818] hover:border-white/40 hover:-translate-y-0.5 active:scale-95 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-haspopup="dialog"
             aria-expanded={isCardOpen}
           >
