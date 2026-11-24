@@ -52,6 +52,7 @@ export interface StickyCardProps {
   title: string;
   src?: string;
   cover?: string;
+  video?: string;
   progress: MotionValue<number>;
   range: [number, number];
   targetScale: number;
@@ -73,6 +74,7 @@ const StickyCard_001 = ({
   title,
   src,
   cover,
+  video,
   progress,
   range,
   targetScale,
@@ -193,6 +195,7 @@ const StickyCard_001 = ({
             <div className="lg:col-span-7 flex justify-center items-center">
               <MonitorMockup
                 image={imageSrc}
+                video={video}
                 title={title}
                 subtitle={summary}
               />

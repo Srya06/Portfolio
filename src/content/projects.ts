@@ -13,6 +13,7 @@ export const projects: PortfolioProject[] = [
     role: "Full-Stack Project Developer",
     year: 2026,
     cover: "/images/projects/hiretrack/cover.svg",
+    video: "/images/projects/hiretrack/demo.mp4",
     problem: "Students and applicants preparing for placements frequently juggle fragmented resources—job applications, mock preparation schedules, interview trackers, and company-specific requirements.",
     context: "Designed as an end-to-end recruitment preparation platform concept bringing application management, task tracking, and preparation stages into a unified interface.",
     architecture: [

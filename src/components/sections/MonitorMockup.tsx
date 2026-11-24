@@ -4,6 +4,7 @@ import Image from "next/image";
 
 interface MonitorMockupProps {
   image?: string;
+  video?: string;
   title: string;
   subtitle?: string;
   className?: string;
@@ -12,6 +13,7 @@ interface MonitorMockupProps {
 
 export function MonitorMockup({
   image,
+  video,
   title,
   subtitle,
   className = "",
@@ -26,7 +28,18 @@ export function MonitorMockup({
 
         {/* Screen Display Area */}
         <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#0D0C0C] border border-white/5 flex items-center justify-center">
-          {image ? (
+          {video ? (
+            <div className="relative w-full h-full bg-black">
+              <video
+                src={video}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ) : image ? (
             <div className="relative w-full h-full">
               <Image
                 src={image}

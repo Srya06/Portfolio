@@ -117,16 +117,28 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </div>
       </header>
 
-      {/* Cover Visual Artwork */}
+      {/* Cover Visual Artwork / Video Preview */}
       <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden border border-line bg-bg-elev shadow-2xl">
-        <Image
-          src={project.cover}
-          alt={`${project.title} architectural overview and interface diagram`}
-          fill
-          priority
-          unoptimized={project.cover.endsWith(".svg")}
-          className="object-cover"
-        />
+        {project.video ? (
+          <video
+            src={project.video}
+            autoPlay
+            loop
+            muted
+            playsInline
+            controls
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <Image
+            src={project.cover}
+            alt={`${project.title} architectural overview and interface diagram`}
+            fill
+            priority
+            unoptimized={project.cover.endsWith(".svg")}
+            className="object-cover"
+          />
+        )}
       </div>
 
       {/* Medical/Research Disclaimer Notice if Applicable */}

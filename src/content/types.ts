@@ -12,6 +12,7 @@ export type PortfolioProject = {
   role: string;
   year: number;
   cover: string;
+  video?: string;
   problem: string;
   context: string;
   architecture: string[];
