@@ -186,6 +186,7 @@ export const projects: PortfolioProject[] = [
     role: "Full-Stack AI Developer",
     year: 2026,
     cover: "/images/projects/campus-ai-assistant/cover.svg",
+    video: "/images/projects/campus-ai-assistant/demo.mp4",
     problem: "Campus information is typically scattered across disparate noticeboards, university PDF handbooks, and faculty emails, causing student frustration and administrative overload.",
     context: "Built as a centralized campus assistant exploring conversational retrieval grounded in university handbook documents, calendar notices, and common student FAQs.",
     architecture: [
